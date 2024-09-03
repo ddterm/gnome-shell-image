@@ -1,0 +1,101 @@
+concurrency: ${{ github.workflow }}/${{ github.ref }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      push:
+        description: "Push built image"
+        default: true
+        required: false
+        type: boolean
+
+  workflow_call:
+    inputs:
+      push:
+        description: "Push built image"
+        default: true
+        required: false
+        type: boolean
+
+jobs:
+  build-test:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: fedora-39
+            dockerfile: fedora.dockerfile
+
+          - image: fedora-40
+            dockerfile: fedora.dockerfile
+
+          - image: debian-12
+            dockerfile: debian.dockerfile
+
+          - image: debian-13
+            dockerfile: debian.dockerfile
+
+          - image: ubuntu-24.04
+            dockerfile: debian.dockerfile
+
+          - image: archlinux
+            dockerfile: archlinux.dockerfile
+
+          - image: opensuse-tumbleweed
+            dockerfile: suse.dockerfile
+
+          - image: opensuse-leap-15.6
+            dockerfile: suse.dockerfile
+
+    timeout-minutes: 15
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.image }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: docker_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+
+      - id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          build-args: |
+            base_image=${{ matrix.image }}
+          pull: true
+          push: ${{ inputs.push }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+          annotations: ${{ steps.docker_meta.outputs.annotations }}
+          cache-from: |
+            ${{ steps.docker_meta.outputs.tags }}
+            ${{ env.IMAGE }}:master
+          cache-to: type=inline
+
+      - run: podman pull docker-daemon:${{ steps.docker_build.outputs.imageid }} | tee .podman-image-id
+
+      - id: gnome-session-x11
+        name: Test gnome-session-x11
+        run: test/test-x11.sh $(cat .podman-image-id)
+
+      - id: gnome-session-wayland
+        name: Test gnome-session-wayland
+        run: test/test-wayland.sh $(cat .podman-image-id)
+
+      - name: Upload screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.image }}-screenshots
+          path: test/*.png
+        if: ${{ always() }}

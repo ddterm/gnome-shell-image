@@ -1,0 +1,15 @@
+name: pr
+
+on:
+  pull_request:
+    paths-ignore:
+      - renovate.json
+      - README.md
+      - LICENSE
+
+jobs:
+  ci:
+    if: ${{ github.event.pull_request.base.repo.node_id != github.event.pull_request.head.repo.node_id }}
+    uses: ./.github/workflows/common.yml
+    with:
+      push: false

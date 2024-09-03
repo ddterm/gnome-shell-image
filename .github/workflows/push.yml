@@ -1,0 +1,20 @@
+name: push
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - master
+    tags:
+      - "*"
+    paths-ignore:
+      - renovate.json
+      - README.md
+      - LICENSE
+
+permissions:
+  packages: write
+
+jobs:
+  ci:
+    uses: ./.github/workflows/common.yml

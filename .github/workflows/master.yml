@@ -1,0 +1,23 @@
+name: master
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - renovate.json
+      - README.md
+      - LICENSE
+
+permissions:
+  packages: write
+
+jobs:
+  ci:
+    uses: ./.github/workflows/common.yml
+  tag:
+    needs: ci
+    uses: ./.github/workflows/tag.yml
+    permissions:
+      contents: write
+      actions: write
