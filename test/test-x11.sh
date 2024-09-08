@@ -22,16 +22,17 @@ ENV_VARS=(
     "DBUS_SESSION_BUS_ADDRESS=unix:path=${SHARED_DIR}/runtime/bus"
     "NO_AT_BRIDGE=1"
     "GTK_A11Y=none"
-    "DISPLAY=:99"
 )
 
 mkdir -p "${SHARED_DIR}/runtime" "${SHARED_DIR}/config" "${SHARED_DIR}/cache" "${SHARED_DIR}/state"
 chmod 0700 "${SHARED_DIR}/runtime" "${SHARED_DIR}/config" "${SHARED_DIR}/cache" "${SHARED_DIR}/state"
 
+UID="$(id -u)"
+
 set -ex
 
 CAPS="SYS_ADMIN,SYS_NICE,SYS_PTRACE,SETPCAP,NET_RAW,NET_BIND_SERVICE,IPC_LOCK"
-CID="$(podman create --log-driver=none --tty --cap-add="$CAPS" --security-opt=label=disable --user=0 --userns=keep-id:uid=1000,gid=1000 -v "$SHARED_DIR:$SHARED_DIR" "$1")"
+CID="$(podman create --log-driver=none --tty --cap-add="$CAPS" --security-opt=label=disable --user=0 --userns=keep-id -v "$SHARED_DIR:$SHARED_DIR" "$1")"
 
 trap shutdown EXIT
 
@@ -40,17 +41,16 @@ podman wait --condition=running "$CID"
 podman exec "$CID" busctl --watch-bind=true status
 podman exec "$CID" systemctl is-system-running --wait
 
-podman exec --user=1000 "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session --nopidfile --syslog --fork "--address=unix:path=${SHARED_DIR}/runtime/bus"
-podman exec --user=1000 "${ENV_VARS[@]/#/--env=}" "$CID" busctl --user --watch-bind=true status
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session --nopidfile --syslog --fork "--address=unix:path=${SHARED_DIR}/runtime/bus"
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" busctl --user --watch-bind=true status
 env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.Peer.Ping
 
 mkfifo "${SHARED_DIR}/display_pipe"
-podman exec --user=1000 "${ENV_VARS[@]/#/--env=}" "$CID" bash -c "Xvfb -screen 0 1600x960x24 -nolisten tcp -displayfd 3 :99 3>'${SHARED_DIR}/display_pipe'" &
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" bash -c "Xvfb -screen 0 1600x960x24 -nolisten tcp -displayfd 3 3>'${SHARED_DIR}/display_pipe'" &
 
 read -r DISPLAY_NUMBER <"${SHARED_DIR}/display_pipe"
-test ":$DISPLAY_NUMBER" = ":99"
 
-podman exec --user=1000 "${ENV_VARS[@]/#/--env=}" "$CID" gnome-shell --x11 --sm-disable --unsafe-mode &
+podman exec "--user=$(id -u)" "${ENV_VARS[@]/#/--env=}" "--env=DISPLAY=:$DISPLAY_NUMBER" "$CID" gnome-shell --x11 --sm-disable --unsafe-mode &
 
 while ! env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames | grep '"org.gnome.Shell.Screenshot"'
 do

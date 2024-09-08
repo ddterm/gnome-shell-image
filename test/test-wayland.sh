@@ -27,10 +27,12 @@ ENV_VARS=(
 mkdir -p "${SHARED_DIR}/runtime" "${SHARED_DIR}/config" "${SHARED_DIR}/cache" "${SHARED_DIR}/state"
 chmod 0700 "${SHARED_DIR}/runtime" "${SHARED_DIR}/config" "${SHARED_DIR}/cache" "${SHARED_DIR}/state"
 
+UID="$(id -u)"
+
 set -ex
 
 CAPS="SYS_ADMIN,SYS_NICE,SYS_PTRACE,SETPCAP,NET_RAW,NET_BIND_SERVICE,IPC_LOCK"
-CID="$(podman create --log-driver=none --tty --cap-add="$CAPS" --security-opt=label=disable --user=0 --userns=keep-id:uid=1000,gid=1000 -v "$SHARED_DIR:$SHARED_DIR" "$1")"
+CID="$(podman create --log-driver=none --tty --cap-add="$CAPS" --security-opt=label=disable --user=0 --userns=keep-id -v "$SHARED_DIR:$SHARED_DIR" "$1")"
 
 trap shutdown EXIT
 
@@ -39,11 +41,11 @@ podman wait --condition=running "$CID"
 podman exec "$CID" busctl --watch-bind=true status
 podman exec "$CID" systemctl is-system-running --wait
 
-podman exec --user=1000 "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session --nopidfile --syslog --fork "--address=unix:path=${SHARED_DIR}/runtime/bus"
-podman exec --user=1000 "${ENV_VARS[@]/#/--env=}" "$CID" busctl --user --watch-bind=true status
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session --nopidfile --syslog --fork "--address=unix:path=${SHARED_DIR}/runtime/bus"
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" busctl --user --watch-bind=true status
 env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.Peer.Ping
 
-podman exec --user=1000 "${ENV_VARS[@]/#/--env=}" "$CID" gnome-shell --wayland --headless --sm-disable --unsafe-mode --virtual-monitor 1600x960 &
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" gnome-shell --wayland --headless --sm-disable --unsafe-mode --virtual-monitor 1600x960 &
 
 while ! env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames | grep '"org.gnome.Shell.Screenshot"'
 do

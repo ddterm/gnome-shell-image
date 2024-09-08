@@ -24,9 +24,7 @@ COPY data /
 
 RUN systemctl set-default multi-user.target && \
     systemctl mask systemd-oomd low-memory-monitor rtkit-daemon udisks2 && \
-    adduser -m -U -G users,adm gnomeshell && \
     chmod u+rw /etc/shadow && \
-    truncate --size 0 /etc/machine-id && \
-    dconf update
+    truncate --size 0 /etc/machine-id
 
 CMD [ "/sbin/init" ]
