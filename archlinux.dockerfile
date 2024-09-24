@@ -1,4 +1,4 @@
-FROM docker.io/library/archlinux:latest@sha256:d37c2099060d7fa67d030e6cbe99b7c2c7f83633061259dd129770b36b26060f
+FROM docker.io/library/archlinux:latest@sha256:0f4020e179ffd4ffaeee875e0428db4725a70bad0b19d41a4a67c5ab9ad25a8f
 
 RUN pacman -Rdd --noconfirm dbus-broker-units \
     && pacman -Syu --noconfirm \

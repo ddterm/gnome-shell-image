@@ -2,7 +2,7 @@ ARG base_image=ubuntu-24.04
 
 FROM docker.io/library/debian:12@sha256:b8084b1a576c5504a031936e1132574f4ce1d6cc7130bbcc25a28f074539ae6b AS debian-12
 FROM docker.io/library/debian:trixie@sha256:9f7b513ffd1a78901e6802e47ac03c3e8b5d5bafb06054ed8c757f9a043c2e60 AS debian-13
-FROM docker.io/library/ubuntu:24.04@sha256:8a37d68f4f73ebf3d4efafbcf66379bf3728902a8038616808f04e34a9ab63ee AS ubuntu-24.04
+FROM docker.io/library/ubuntu:24.04@sha256:dfc10878be8d8fc9c61cbff33166cb1d1fe44391539243703c72766894fa834a AS ubuntu-24.04
 
 FROM ${base_image}
 
