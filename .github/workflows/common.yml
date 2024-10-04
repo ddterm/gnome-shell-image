@@ -45,6 +45,9 @@ jobs:
           - image: ubuntu-24.04
             dockerfile: debian.dockerfile
 
+          - image: ubuntu-24.10
+            dockerfile: debian.dockerfile
+
           - image: archlinux
             dockerfile: archlinux.dockerfile
 
