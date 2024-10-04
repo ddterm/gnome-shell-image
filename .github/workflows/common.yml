@@ -30,6 +30,9 @@ jobs:
           - image: fedora-40
             dockerfile: fedora.dockerfile
 
+          - image: fedora-41
+            dockerfile: fedora.dockerfile
+
           - image: debian-12
             dockerfile: debian.dockerfile
 
