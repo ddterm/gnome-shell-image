@@ -19,13 +19,13 @@ ENV_VARS=(
     "XDG_CONFIG_HOME=${SHARED_DIR}/config"
     "XDG_CACHE_HOME=${SHARED_DIR}/cache"
     "XDG_STATE_HOME=${SHARED_DIR}/state"
+    "XDG_DATA_HOME=${SHARED_DIR}/data"
     "DBUS_SESSION_BUS_ADDRESS=unix:path=${SHARED_DIR}/runtime/bus"
     "NO_AT_BRIDGE=1"
     "GTK_A11Y=none"
 )
 
-mkdir -p "${SHARED_DIR}/runtime" "${SHARED_DIR}/config" "${SHARED_DIR}/cache" "${SHARED_DIR}/state"
-chmod 0700 "${SHARED_DIR}/runtime" "${SHARED_DIR}/config" "${SHARED_DIR}/cache" "${SHARED_DIR}/state"
+mkdir -m 0700 -v "${SHARED_DIR}/runtime" "${SHARED_DIR}/config" "${SHARED_DIR}/cache" "${SHARED_DIR}/state" "${SHARED_DIR}/data"
 
 UID="$(id -u)"
 
