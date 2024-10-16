@@ -12,6 +12,7 @@ RUN dnf install -y --nodocs --setopt install_weak_deps=False \
         gjs \
         gdm \
         vte291 \
+        vte291-gtk4 \
         xorg-x11-server-Xvfb \
         mesa-dri-drivers \
         wl-clipboard \

@@ -14,6 +14,7 @@ RUN apt-get update -y && \
         dbus-user-session \
         gdm3 \
         gir1.2-vte-2.91 \
+        gir1.2-vte-3.91 \
         xvfb \
         packagekit \
         gir1.2-packagekitglib-1.0 \

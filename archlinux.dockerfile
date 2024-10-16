@@ -5,6 +5,7 @@ RUN pacman -Rdd --noconfirm dbus-broker-units \
         dbus-daemon-units \
         gnome-shell \
         vte3 \
+        vte4 \
         xorg-server-xvfb \
         xorg-xinit \
         mesa \
