@@ -24,6 +24,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - image: centos-stream9
+            dockerfile: centos.dockerfile
+
           - image: fedora-39
             dockerfile: fedora.dockerfile
 
