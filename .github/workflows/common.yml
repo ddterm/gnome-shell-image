@@ -40,7 +40,7 @@ jobs:
             dockerfile: debian.dockerfile
 
           - image: ubuntu-22.04
-            dockerfile: debian.dockerfile
+            dockerfile: debian-old.dockerfile
 
           - image: ubuntu-24.04
             dockerfile: debian.dockerfile
