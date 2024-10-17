@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream9@sha256:70f5d98f555a6cc185d29432e7b5e1a0881c8c3e5d0d1590daa01b616d3b4048
+FROM quay.io/centos/centos:stream9@sha256:f5aeff3bc17215a1d29f6eedaa44715c3ebb06ab03ec4e05f7b6f64a76f420b9
 
 RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
     dnf install -y --nodocs --setopt install_weak_deps=False \
