@@ -4,10 +4,12 @@ FROM docker.io/opensuse/tumbleweed:latest@sha256:3cca428514cb0f72646ae76bc71baaa
 FROM docker.io/opensuse/leap:15.6@sha256:8cf656d677c02d31db333fcc2f97c7fcaa1ced47437f3b6e2582bd4ddce058ed AS opensuse-leap-15.6
 
 FROM ${base_image}
+ARG base_image
 
 RUN zypper --non-interactive install --no-recommends \
         systemd-sysvinit \
         xorg-x11-server-Xvfb \
+        $(if [ $base_image = opensuse-tumbleweed ]; then echo gnome-session-xsession; fi) \
         gjs \
         gdm \
         gnome-session-wayland \
