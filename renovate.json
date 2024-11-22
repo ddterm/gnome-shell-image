@@ -3,7 +3,8 @@
   "extends": [
     "config:recommended",
     ":maintainLockFilesWeekly",
-    "npm:unpublishSafe"
+    "npm:unpublishSafe",
+    "schedule:automergeWeekly"
   ],
   "packageRules": [
     {
@@ -11,14 +12,6 @@
         "docker"
       ],
       "pinDigests": true
-    },
-    {
-      "matchPackagePatterns": [
-        "opensuse/tumbleweed$"
-      ],
-      "extends": [
-        "schedule:automergeWeekly"
-      ]
     },
     {
       "excludePackagePatterns": [
