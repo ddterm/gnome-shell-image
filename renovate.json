@@ -14,11 +14,11 @@
       "pinDigests": true
     },
     {
-      "excludePackagePatterns": [
-        "opensuse/tumbleweed$"
-      ],
       "extends": [
         "schedule:automergeDaily"
+      ],
+      "matchPackageNames": [
+        "!/opensuse/tumbleweed$/"
       ]
     }
   ],
