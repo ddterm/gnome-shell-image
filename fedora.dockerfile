@@ -3,7 +3,7 @@ ARG base_image=fedora-40
 FROM docker.io/library/fedora:39@sha256:d63d63fe593749a5e8dbc8152427d40bbe0ece53d884e00e5f3b44859efa5077 AS fedora-39
 FROM docker.io/library/fedora:40@sha256:7cdd2b48396929bb8723ea2fa60e03bee39cc22e2a853cbd891587fab4eb1bc9 AS fedora-40
 FROM docker.io/library/fedora:41@sha256:3ec60eb34fa1a095c0c34dd37cead9fd38afb62612d43892fcf1d3425c32bc1e AS fedora-41
-FROM quay.io/centos/centos:stream9@sha256:ae0cd612d8614e454a92d217a099ff7359fbbcaf9f6888c080d5e1d0bfede661 AS centos-stream9
+FROM quay.io/centos/centos:stream9@sha256:9a98877bbde75f5991ffe50d35169d8cb873c124150e30dacb11d431a43bd790 AS centos-stream9
 
 FROM ${base_image}
 ARG base_image
