@@ -27,9 +27,6 @@ jobs:
           - image: centos-stream9
             dockerfile: fedora.dockerfile
 
-          - image: fedora-39
-            dockerfile: fedora.dockerfile
-
           - image: fedora-40
             dockerfile: fedora.dockerfile
 
