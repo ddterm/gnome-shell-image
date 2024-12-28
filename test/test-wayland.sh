@@ -39,7 +39,7 @@ trap shutdown EXIT
 podman start --attach --sig-proxy=false "$CID" &
 podman wait --condition=running "$CID"
 podman exec "$CID" busctl --watch-bind=true status
-podman exec "$CID" systemctl is-system-running --wait
+podman exec "$CID" gdbus wait --system --timeout=60 org.freedesktop.login1
 
 podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session --nopidfile --syslog --fork "--address=unix:path=${SHARED_DIR}/runtime/bus"
 env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.Peer.Ping
