@@ -52,10 +52,7 @@ read -r DISPLAY_NUMBER <"${SHARED_DIR}/display_pipe"
 
 podman exec "--user=$(id -u)" "${ENV_VARS[@]/#/--env=}" "--env=DISPLAY=:$DISPLAY_NUMBER" "$CID" gnome-shell --x11 --sm-disable --unsafe-mode &
 
-while ! env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames | grep '"org.gnome.Shell.Screenshot"'
-do
-    sleep 1
-done
+env "${ENV_VARS[@]}" gdbus wait --session --timeout=60 org.gnome.Shell.Screenshot
 
 while env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.gnome.Shell /org/gnome/Shell org.gnome.Shell.Eval 'string:Main.layoutManager._startingUp' | grep 'string "true"'
 do

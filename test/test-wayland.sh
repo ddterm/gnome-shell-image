@@ -47,10 +47,7 @@ env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DB
 
 podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" gnome-shell --wayland --headless --sm-disable --unsafe-mode --virtual-monitor 1600x960 &
 
-while ! env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames | grep '"org.gnome.Shell.Screenshot"'
-do
-    sleep 1
-done
+env "${ENV_VARS[@]}" gdbus wait --session --timeout=60 org.gnome.Shell.Screenshot
 
 while env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.gnome.Shell /org/gnome/Shell org.gnome.Shell.Eval 'string:Main.layoutManager._startingUp' | grep 'string "true"'
 do
