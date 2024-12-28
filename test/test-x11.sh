@@ -42,7 +42,6 @@ podman exec "$CID" busctl --watch-bind=true status
 podman exec "$CID" systemctl is-system-running --wait
 
 podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session --nopidfile --syslog --fork "--address=unix:path=${SHARED_DIR}/runtime/bus"
-podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" busctl --user --watch-bind=true status
 env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.Peer.Ping
 
 mkfifo "${SHARED_DIR}/display_pipe"
