@@ -3,12 +3,12 @@ ARG base_image=fedora-40
 FROM docker.io/library/fedora:39@sha256:d63d63fe593749a5e8dbc8152427d40bbe0ece53d884e00e5f3b44859efa5077 AS fedora-39
 FROM docker.io/library/fedora:40@sha256:7cdd2b48396929bb8723ea2fa60e03bee39cc22e2a853cbd891587fab4eb1bc9 AS fedora-40
 FROM docker.io/library/fedora:41@sha256:3ec60eb34fa1a095c0c34dd37cead9fd38afb62612d43892fcf1d3425c32bc1e AS fedora-41
-FROM quay.io/centos/centos:stream9@sha256:9a98877bbde75f5991ffe50d35169d8cb873c124150e30dacb11d431a43bd790 AS centos-stream9
+FROM quay.io/centos/centos:stream10@sha256:3a3a88a9c8c47dc60b8af3be0779d74c2d3da11a32082ac1a4c329863c422df3 AS centos-stream10
 
 FROM ${base_image}
 ARG base_image
 
-RUN if [ $base_image = centos-stream9 ]; then dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm; fi && \
+RUN if [ $base_image = centos-stream10 ]; then dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm; fi && \
     dnf install -y --nodocs --setopt install_weak_deps=False \
         gnome-session-xsession \
         gnome-extensions-app \
