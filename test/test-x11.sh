@@ -8,7 +8,7 @@ fi
 SCRIPT_DIR=$(CDPATH="" cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 function shutdown {
-    podman exec "$CID" systemctl list-units --failed || true
+    podman exec "$CID" sh -c 'if command -v systemctl; then systemctl list-units --failed; else rc-status -a; fi' || true
     podman rm -f "$CID"
 }
 
@@ -45,7 +45,7 @@ podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session
 env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.Peer.Ping
 
 mkfifo "${SHARED_DIR}/display_pipe"
-podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" bash -c "Xvfb -screen 0 1600x960x24 -nolisten tcp -displayfd 3 3>'${SHARED_DIR}/display_pipe'" &
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" sh -c "Xvfb -screen 0 1600x960x24 -nolisten tcp -displayfd 3 3>'${SHARED_DIR}/display_pipe'" &
 
 read -r DISPLAY_NUMBER <"${SHARED_DIR}/display_pipe"
 

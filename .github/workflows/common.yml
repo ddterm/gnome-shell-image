@@ -24,6 +24,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - image: alpine-3.18
+            dockerfile: alpine.dockerfile
+
+          - image: alpine-3.19
+            dockerfile: alpine.dockerfile
+
+          - image: alpine-3.20
+            dockerfile: alpine.dockerfile
+
+          - image: alpine-3.21
+            dockerfile: alpine.dockerfile
+
           - image: centos-stream9
             dockerfile: fedora.dockerfile
 
