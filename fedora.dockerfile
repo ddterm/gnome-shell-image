@@ -18,8 +18,6 @@ RUN if [ $base_image = centos-stream9 ]; then dnf install -y https://dl.fedorapr
         xorg-x11-server-Xvfb \
         mesa-dri-drivers \
         wl-clipboard \
-        PackageKit \
-        PackageKit-glib \
         libhandy \
     && dnf clean all -y
 

@@ -18,8 +18,6 @@ RUN apt-get update -y && \
         gir1.2-vte-2.91 \
         $(if [ $base_image != ubuntu-22.04 ]; then echo gir1.2-vte-3.91; fi) \
         xvfb \
-        packagekit \
-        gir1.2-packagekitglib-1.0 \
         wl-clipboard \
         gir1.2-handy-1
 

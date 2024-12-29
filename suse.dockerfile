@@ -19,8 +19,6 @@ RUN mkdir -p /usr/share/xsessions && \
         gtk3-metatheme-adwaita \
         typelib-1_0-Vte-2.91 \
         typelib-1_0-Vte-3_91 \
-        PackageKit \
-        typelib-1_0-PackageKitGlib-1_0 \
         typelib-1_0-Handy-1_0 \
         wl-clipboard \
     && zypper clean --all

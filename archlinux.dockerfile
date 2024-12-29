@@ -9,7 +9,6 @@ RUN pacman -Rdd --noconfirm dbus-broker-units \
         xorg-server-xvfb \
         xorg-xinit \
         mesa \
-        packagekit \
         gdm \
         wl-clipboard \
         libhandy \
