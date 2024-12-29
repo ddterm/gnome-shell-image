@@ -56,3 +56,5 @@ done
 
 env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.gnome.Shell.Screenshot /org/gnome/Shell/Screenshot org.gnome.Shell.Screenshot.Screenshot 'boolean:true' 'boolean:false' "string:${SHARED_DIR}/screenshot-wayland.png"
 cp "${SHARED_DIR}/screenshot-wayland.png" "${SCRIPT_DIR}/"
+
+podman exec "$CID" sh -c 'if command -v systemctl; then systemctl is-system-running; fi'
