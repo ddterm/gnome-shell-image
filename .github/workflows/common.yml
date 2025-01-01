@@ -52,13 +52,13 @@ jobs:
             dockerfile: debian.dockerfile
 
           - image: ubuntu-22.04
-            dockerfile: debian.dockerfile
+            dockerfile: ubuntu.dockerfile
 
           - image: ubuntu-24.04
-            dockerfile: debian.dockerfile
+            dockerfile: ubuntu.dockerfile
 
           - image: ubuntu-24.10
-            dockerfile: debian.dockerfile
+            dockerfile: ubuntu.dockerfile
 
           - image: archlinux
             dockerfile: archlinux.dockerfile
