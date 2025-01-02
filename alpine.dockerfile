@@ -27,4 +27,6 @@ RUN sed -i '/getty/d' /etc/inittab && \
     rc-update add elogind && \
     rc-update add polkit
 
+ENV XDG_CURRENT_DESKTOP=GNOME
+
 CMD [ "/sbin/init" ]

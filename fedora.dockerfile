@@ -28,4 +28,6 @@ RUN systemctl set-default multi-user.target && \
     chmod u+rw /etc/shadow && \
     truncate --size 0 /etc/machine-id
 
+ENV XDG_CURRENT_DESKTOP=GNOME
+
 CMD [ "/sbin/init" ]

@@ -20,4 +20,6 @@ RUN systemctl set-default multi-user.target && \
     systemctl mask systemd-oomd low-memory-monitor rtkit-daemon udisks2 && \
     truncate --size 0 /etc/machine-id
 
+ENV XDG_CURRENT_DESKTOP=GNOME
+
 CMD [ "/sbin/init" ]
