@@ -36,9 +36,6 @@ jobs:
           - image: alpine-3.21
             dockerfile: alpine.dockerfile
 
-          - image: centos-stream9
-            dockerfile: fedora.dockerfile
-
           - image: fedora-40
             dockerfile: fedora.dockerfile
 
