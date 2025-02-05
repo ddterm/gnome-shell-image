@@ -1,7 +1,7 @@
 ARG base_image=debian-12
 
-FROM docker.io/library/debian:12@sha256:321341744acb788e251ebd374aecc1a42d60ce65da7bd4ee9207ff6be6686a62 AS debian-12
-FROM docker.io/library/debian:trixie@sha256:169d8cd1bea1c324e1f05b2e1da6197a576550bf5193d7250e9def4f6cf550cd AS debian-13
+FROM docker.io/library/debian:12@sha256:4abf773f2a570e6873259c4e3ba16de6c6268fb571fd46ec80be7c67822823b3 AS debian-12
+FROM docker.io/library/debian:trixie@sha256:fa9a819b972c94b2cb4a160c90fb7c7d782b5ae520d822d47c8c94aaab606fdb AS debian-13
 
 FROM ${base_image}
 ARG base_image
