@@ -37,16 +37,5 @@
     },
     "groupName": "Base images"
   },
-  "automerge": true,
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/.+\\.ya?ml"
-      ],
-      "matchStrings": [
-        "#\\s*renovate:\\s+datasource=(?<datasource>[^\\s]+)\\s+depName=(?<depName>[^\\s]+)(\\s+(lookupName|packageName)=(?<packageName>[^\\s]+))?(\\s+versioning=(?<versioning>[^\\s]+))?\\n\\s*\\w+\\s*:\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?(\\s|$)"
-      ]
-    }
-  ]
+  "automerge": true
 }
