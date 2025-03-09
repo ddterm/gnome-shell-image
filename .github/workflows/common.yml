@@ -35,6 +35,7 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04
           - ubuntu-24.10
+          - ubuntu-25.04
           - archlinux
           - opensuse-tumbleweed
           - opensuse-leap-15.6
