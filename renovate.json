@@ -4,7 +4,8 @@
     "config:recommended",
     ":maintainLockFilesWeekly",
     "npm:unpublishSafe",
-    "schedule:automergeWeekly"
+    "schedule:automergeWeekly",
+    "customManagers:dockerfileVersions"
   ],
   "packageRules": [
     {
@@ -14,11 +15,17 @@
       "pinDigests": true
     },
     {
+      "matchFileNames": [
+        "*.dockerfile"
+      ],
+      "groupName": "Image dependencies"
+    },
+    {
+      "matchManagers": [
+        "regex"
+      ],
       "extends": [
         "schedule:automergeDaily"
-      ],
-      "matchPackageNames": [
-        "!/opensuse/tumbleweed$/"
       ]
     }
   ],
@@ -34,8 +41,7 @@
     },
     "patch": {
       "enabled": false
-    },
-    "groupName": "Base images"
+    }
   },
   "automerge": true
 }

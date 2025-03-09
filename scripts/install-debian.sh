@@ -5,6 +5,7 @@ set -ex
 source /etc/os-release
 
 packages=(
+    "gnome-shell=$GNOME_SHELL_VERSION"
     gnome-session
     gjs
     dbus-user-session
@@ -29,3 +30,5 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get update -y
 apt-get install -y --no-install-recommends "${packages[@]}"
+
+test "$(dpkg-query --showformat='${Version}' --show gnome-shell)" = "$GNOME_SHELL_VERSION"

@@ -5,6 +5,7 @@ set -ex
 source /etc/os-release
 
 packages=(
+    "gnome-shell-$GNOME_SHELL_VERSION"
     systemd-sysvinit
     xorg-x11-server-Xvfb
     gjs
@@ -20,8 +21,11 @@ packages=(
 
 if [ "$ID" = "opensuse-tumbleweed" ]
 then
-    zypper --non-interactive install --no-recommends gnome-session-xsession
+    packages+=(gnome-session-xsession)
 fi
 
-zypper --non-interactive install --no-recommends "${packages[@]}"
+zypper --non-interactive install --no-recommends -f "${packages[@]}"
+
+rpm -q "gnome-shell-$GNOME_SHELL_VERSION"
+
 zypper clean --all

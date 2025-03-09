@@ -9,12 +9,14 @@ apk add \
     polkit-elogind \
     mesa \
     mesa-dri-gallium \
-    gnome-shell \
+    "gnome-shell=$GNOME_SHELL_VERSION" \
     gdm \
     vte3 \
     vte3-gtk4 \
     libhandy1 \
     wl-clipboard \
+
+apk info -e "gnome-shell=$GNOME_SHELL_VERSION"
 
 rm -rf /var/cache/apk/*
 
