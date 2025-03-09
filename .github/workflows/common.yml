@@ -23,48 +23,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - image: alpine-3.18
-            dockerfile: alpine.dockerfile
-
-          - image: alpine-3.19
-            dockerfile: alpine.dockerfile
-
-          - image: alpine-3.20
-            dockerfile: alpine.dockerfile
-
-          - image: alpine-3.21
-            dockerfile: alpine.dockerfile
-
-          - image: fedora-40
-            dockerfile: fedora.dockerfile
-
-          - image: fedora-41
-            dockerfile: fedora.dockerfile
-
-          - image: debian-12
-            dockerfile: debian.dockerfile
-
-          - image: debian-13
-            dockerfile: debian.dockerfile
-
-          - image: ubuntu-22.04
-            dockerfile: ubuntu.dockerfile
-
-          - image: ubuntu-24.04
-            dockerfile: ubuntu.dockerfile
-
-          - image: ubuntu-24.10
-            dockerfile: ubuntu.dockerfile
-
-          - image: archlinux
-            dockerfile: archlinux.dockerfile
-
-          - image: opensuse-tumbleweed
-            dockerfile: suse.dockerfile
-
-          - image: opensuse-leap-15.6
-            dockerfile: suse.dockerfile
+        image:
+          - alpine-3.18
+          - alpine-3.19
+          - alpine-3.20
+          - alpine-3.21
+          - fedora-40
+          - fedora-41
+          - debian-12
+          - debian-13
+          - ubuntu-22.04
+          - ubuntu-24.04
+          - ubuntu-24.10
+          - archlinux
+          - opensuse-tumbleweed
+          - opensuse-leap-15.6
 
     timeout-minutes: 15
     env:
@@ -88,9 +61,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ${{ matrix.dockerfile }}
-          build-args: |
-            base_image=${{ matrix.image }}
+          file: ${{ matrix.image }}.dockerfile
           pull: true
           push: ${{ inputs.push }}
           tags: ${{ steps.docker_meta.outputs.tags }}
