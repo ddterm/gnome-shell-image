@@ -22,7 +22,7 @@
     },
     {
       "matchManagers": [
-        "regex"
+        "custom.regex"
       ],
       "extends": [
         "schedule:automergeDaily"
