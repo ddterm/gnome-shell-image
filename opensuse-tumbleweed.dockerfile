@@ -1,4 +1,4 @@
-FROM docker.io/opensuse/tumbleweed:latest@sha256:6fb156c7151f3fdffc651421e2d32029d0faad7a2550c4a07ea27685bcdfd271
+FROM docker.io/opensuse/tumbleweed:latest@sha256:0dd6a41f9e87f6664c5420e3d95847e46826469733ee64c50f979a026b29fb52
 
 # renovate: datasource=repology depName=opensuse_tumbleweed/gnome-shell versioning=rpm
 ARG GNOME_SHELL_VERSION=47.5-1.2
