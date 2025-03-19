@@ -3,8 +3,14 @@ FROM docker.io/opensuse/leap:15.6
 # renovate: datasource=repology depName=opensuse_leap_15_6/gnome-shell versioning=rpm
 ARG GNOME_SHELL_VERSION=45.3-150600.5.9.2
 
+# renovate: datasource=repology depName=opensuse_leap_15_6/mutter versioning=rpm
+ARG MUTTER_VERSION=45.3-150600.5.9.1
+
 COPY scripts/install-suse.sh /usr/local/bin/
-RUN env "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" /usr/local/bin/install-suse.sh
+RUN env \
+    "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
+    "MUTTER_VERSION=$MUTTER_VERSION" \
+    /usr/local/bin/install-suse.sh
 
 COPY data /
 

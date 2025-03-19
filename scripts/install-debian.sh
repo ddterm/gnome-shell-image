@@ -6,6 +6,7 @@ source /etc/os-release
 
 packages=(
     "gnome-shell=$GNOME_SHELL_VERSION"
+    "mutter=$MUTTER_VERSION"
     gnome-session
     gjs
     dbus-user-session
@@ -32,3 +33,4 @@ apt-get update -y
 apt-get install -y --no-install-recommends "${packages[@]}"
 
 test "$(dpkg-query --showformat='${Version}' --show gnome-shell)" = "$GNOME_SHELL_VERSION"
+test "$(dpkg-query --showformat='${Version}' --show mutter)" = "$MUTTER_VERSION"

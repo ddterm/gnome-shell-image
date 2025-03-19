@@ -3,8 +3,14 @@ FROM quay.io/fedora/fedora:40
 # renovate: datasource=repology depName=fedora_40/gnome-shell versioning=rpm
 ARG GNOME_SHELL_VERSION=46.9-1.fc40
 
+# renovate: datasource=repology depName=fedora_40/mutter versioning=rpm
+ARG MUTTER_VERSION=46.8-2.fc40
+
 COPY scripts/install-fedora.sh /usr/local/bin/
-RUN env "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" /usr/local/bin/install-fedora.sh
+RUN env \
+    "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
+    "MUTTER_VERSION=$MUTTER_VERSION" \
+    /usr/local/bin/install-fedora.sh
 
 COPY data /
 

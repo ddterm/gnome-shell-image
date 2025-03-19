@@ -6,6 +6,7 @@ source /etc/os-release
 
 packages=(
     "gnome-shell-$GNOME_SHELL_VERSION"
+    "mutter-$MUTTER_VERSION"
     systemd-sysvinit
     xorg-x11-server-Xvfb
     gjs
@@ -27,5 +28,6 @@ fi
 zypper --non-interactive install --no-recommends -f "${packages[@]}"
 
 rpm -q "gnome-shell-$GNOME_SHELL_VERSION"
+rpm -q "mutter-$MUTTER_VERSION"
 
 zypper clean --all

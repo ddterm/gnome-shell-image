@@ -3,8 +3,14 @@ FROM docker.io/library/ubuntu:24.10
 # renovate: datasource=repology depName=ubuntu_24_10/gnome-shell versioning=deb
 ARG GNOME_SHELL_VERSION=47.0-2ubuntu3
 
+# renovate: datasource=repology depName=ubuntu_24_10/mutter versioning=deb
+ARG MUTTER_VERSION=47.0-1ubuntu4.3
+
 COPY scripts/install-debian.sh /usr/local/bin/
-RUN env "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" /usr/local/bin/install-debian.sh
+RUN env \
+    "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
+    "MUTTER_VERSION=$MUTTER_VERSION" \
+    /usr/local/bin/install-debian.sh
 
 COPY data /
 

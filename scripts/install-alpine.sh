@@ -10,6 +10,7 @@ apk add \
     mesa \
     mesa-dri-gallium \
     "gnome-shell=$GNOME_SHELL_VERSION" \
+    "mutter=$MUTTER_VERSION" \
     gdm \
     vte3 \
     vte3-gtk4 \
@@ -17,6 +18,7 @@ apk add \
     wl-clipboard \
 
 apk info -e "gnome-shell=$GNOME_SHELL_VERSION"
+apk info -e "mutter=$MUTTER_VERSION"
 
 rm -rf /var/cache/apk/*
 

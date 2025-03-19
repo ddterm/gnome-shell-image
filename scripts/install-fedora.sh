@@ -4,6 +4,7 @@ set -ex
 
 packages=(
     "gnome-shell-$GNOME_SHELL_VERSION"
+    "mutter-$MUTTER_VERSION"
     gnome-session-xsession
     gnome-extensions-app
     gjs
@@ -19,5 +20,6 @@ packages=(
 dnf install -y --nodocs --setopt install_weak_deps=False "${packages[@]}"
 
 rpm -q "gnome-shell-$GNOME_SHELL_VERSION"
+rpm -q "mutter-$MUTTER_VERSION"
 
 dnf clean all -y
