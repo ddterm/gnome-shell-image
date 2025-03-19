@@ -1,4 +1,4 @@
-FROM docker.io/library/fedora:40@sha256:7cdd2b48396929bb8723ea2fa60e03bee39cc22e2a853cbd891587fab4eb1bc9
+FROM quay.io/fedora/fedora:40
 
 # renovate: datasource=repology depName=fedora_40/gnome-shell versioning=rpm
 ARG GNOME_SHELL_VERSION=46.9-1.fc40

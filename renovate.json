@@ -4,29 +4,16 @@
     "config:recommended",
     ":maintainLockFilesWeekly",
     "npm:unpublishSafe",
-    "schedule:automergeWeekly",
+    ":automergeAll",
+    "schedule:automergeDaily",
     "customManagers:dockerfileVersions"
   ],
   "packageRules": [
-    {
-      "matchCategories": [
-        "docker"
-      ],
-      "pinDigests": true
-    },
     {
       "matchFileNames": [
         "*.dockerfile"
       ],
       "groupName": "Image dependencies"
-    },
-    {
-      "matchManagers": [
-        "custom.regex"
-      ],
-      "extends": [
-        "schedule:automergeDaily"
-      ]
     }
   ],
   "hostRules": [
@@ -37,18 +24,6 @@
     }
   ],
   "dockerfile": {
-    "fileMatch": [
-      "(^|/|\\.)dockerfile$"
-    ],
-    "major": {
-      "enabled": false
-    },
-    "minor": {
-      "enabled": false
-    },
-    "patch": {
-      "enabled": false
-    }
-  },
-  "automerge": true
+    "enabled": false
+  }
 }

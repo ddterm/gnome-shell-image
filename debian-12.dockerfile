@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:12@sha256:35286826a88dc879b4f438b645ba574a55a14187b483d09213a024dc0c0a64ed
+FROM docker.io/library/debian:12
 
 # renovate: datasource=repology depName=debian_12/gnome-shell versioning=deb
 ARG GNOME_SHELL_VERSION=43.9-0+deb12u2

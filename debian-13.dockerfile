@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:trixie@sha256:2ad7bf4cde8aafcdd2711d03cdd55faaaa0d0f833510ef1c731f885e8ef5b445
+FROM docker.io/library/debian:trixie
 
 # renovate: datasource=repology depName=debian_13/gnome-shell versioning=deb
 ARG GNOME_SHELL_VERSION=48~rc-2

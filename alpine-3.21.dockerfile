@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.21@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
+FROM docker.io/library/alpine:3.21
 
 # renovate: datasource=repology depName=alpine_3_21/gnome-shell versioning=deb
 ARG GNOME_SHELL_VERSION=47.5-r0

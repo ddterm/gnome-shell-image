@@ -1,4 +1,4 @@
-FROM docker.io/library/ubuntu:24.10@sha256:102bc1874fdb136fc2d218473f03cf84135cb7496fefdb9c026c0f553cfe1b6d
+FROM docker.io/library/ubuntu:24.10
 
 # renovate: datasource=repology depName=ubuntu_24_10/gnome-shell versioning=deb
 ARG GNOME_SHELL_VERSION=47.0-2ubuntu3

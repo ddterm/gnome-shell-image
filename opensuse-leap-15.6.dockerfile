@@ -1,4 +1,4 @@
-FROM docker.io/opensuse/leap:15.6@sha256:9b9f14889e49a19f1e84b09e80312a0518b3325dde34140b7d76099e003aa1b2
+FROM docker.io/opensuse/leap:15.6
 
 # renovate: datasource=repology depName=opensuse_leap_15_6/gnome-shell versioning=rpm
 ARG GNOME_SHELL_VERSION=45.3-150600.5.9.2
