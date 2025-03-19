@@ -29,6 +29,13 @@
       ]
     }
   ],
+  "hostRules": [
+    {
+      "matchHost": "repology.org",
+      "concurrentRequestLimit": 1,
+      "maxRequestsPerSecond": 1
+    }
+  ],
   "dockerfile": {
     "fileMatch": [
       "(^|/|\\.)dockerfile$"
