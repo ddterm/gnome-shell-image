@@ -1,10 +1,10 @@
 FROM docker.io/opensuse/tumbleweed:latest
 
 # renovate: datasource=repology depName=opensuse_tumbleweed/gnome-shell versioning=rpm
-ARG GNOME_SHELL_VERSION=47.5-1.2
+ARG GNOME_SHELL_VERSION=48.0-1.1
 
 # renovate: datasource=repology depName=opensuse_tumbleweed/mutter versioning=rpm
-ARG MUTTER_VERSION=47.6-1.2
+ARG MUTTER_VERSION=48.0-1.1
 
 # renovate: datasource=repology depName=opensuse_tumbleweed/gjs versioning=rpm
 ARG GJS_VERSION=1.82.1-1.4
