@@ -2,9 +2,14 @@
 
 set -ex
 
-packages=(
+locked_packages=(
     "gnome-shell=$GNOME_SHELL_VERSION"
     "mutter=$MUTTER_VERSION"
+    "gjs=$GJS_VERSION"
+)
+
+packages=(
+    "${locked_packages[@]}"
     dbus-daemon-units
     vte3
     vte4
@@ -19,7 +24,9 @@ packages=(
 pacman -Rdd --noconfirm dbus-broker-units
 pacman -Syu --noconfirm "${packages[@]}"
 
-pacman -Q "gnome-shell=$GNOME_SHELL_VERSION"
-pacman -Q "mutter=$MUTTER_VERSION"
+for pkg in "${locked_packages[@]}"
+do
+    pacman -Q "$pkg"
+done
 
 pacman -Scc --noconfirm

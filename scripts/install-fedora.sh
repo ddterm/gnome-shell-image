@@ -2,12 +2,16 @@
 
 set -ex
 
-packages=(
+locked_packages=(
     "gnome-shell-$GNOME_SHELL_VERSION"
     "mutter-$MUTTER_VERSION"
+    "gjs-$GJS_VERSION"
+)
+
+packages=(
+    "${locked_packages[@]}"
     gnome-session-xsession
     gnome-extensions-app
-    gjs
     gdm
     vte291
     vte291-gtk4
@@ -19,7 +23,9 @@ packages=(
 
 dnf install -y --nodocs --setopt install_weak_deps=False "${packages[@]}"
 
-rpm -q "gnome-shell-$GNOME_SHELL_VERSION"
-rpm -q "mutter-$MUTTER_VERSION"
+for pkg in "${locked_packages[@]}"
+do
+    rpm -q "$pkg"
+done
 
 dnf clean all -y

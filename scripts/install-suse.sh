@@ -4,12 +4,16 @@ set -ex
 
 source /etc/os-release
 
-packages=(
+locked_packages=(
     "gnome-shell-$GNOME_SHELL_VERSION"
     "mutter-$MUTTER_VERSION"
+    "gjs-$GJS_VERSION"
+)
+
+packages=(
+    "${locked_packages[@]}"
     systemd-sysvinit
     xorg-x11-server-Xvfb
-    gjs
     gdm
     gnome-session-wayland
     gnome-extensions
@@ -27,7 +31,9 @@ fi
 
 zypper --non-interactive install --no-recommends -f "${packages[@]}"
 
-rpm -q "gnome-shell-$GNOME_SHELL_VERSION"
-rpm -q "mutter-$MUTTER_VERSION"
+for pkg in "${locked_packages[@]}"
+do
+    rpm -q "$pkg"
+done
 
 zypper clean --all

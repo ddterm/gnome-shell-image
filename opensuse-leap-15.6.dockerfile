@@ -6,10 +6,14 @@ ARG GNOME_SHELL_VERSION=45.3-150600.5.9.2
 # renovate: datasource=repology depName=opensuse_leap_15_6/mutter versioning=rpm
 ARG MUTTER_VERSION=45.3-150600.5.9.1
 
+# renovate: datasource=repology depName=opensuse_leap_15_6/gjs versioning=rpm
+ARG GJS_VERSION=1.78.1-150600.1.3
+
 COPY scripts/install-suse.sh /usr/local/bin/
 RUN env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
+    "GJS_VERSION=$GJS_VERSION" \
     /usr/local/bin/install-suse.sh
 
 COPY data /

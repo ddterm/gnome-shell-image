@@ -6,10 +6,14 @@ ARG GNOME_SHELL_VERSION=47.4-1.fc41
 # renovate: datasource=repology depName=fedora_41/mutter versioning=rpm
 ARG MUTTER_VERSION=47.5-1.fc41
 
+# renovate: datasource=repology depName=fedora_41/gjs versioning=rpm
+ARG GJS_VERSION=1.82.1-3.fc41
+
 COPY scripts/install-fedora.sh /usr/local/bin/
 RUN env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
+    "GJS_VERSION=$GJS_VERSION" \
     /usr/local/bin/install-fedora.sh
 
 COPY data /

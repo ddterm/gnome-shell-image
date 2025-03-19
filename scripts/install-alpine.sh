@@ -11,6 +11,7 @@ apk add \
     mesa-dri-gallium \
     "gnome-shell=$GNOME_SHELL_VERSION" \
     "mutter=$MUTTER_VERSION" \
+    "gjs=$GJS_VERSION" \
     gdm \
     vte3 \
     vte3-gtk4 \
@@ -19,6 +20,7 @@ apk add \
 
 apk info -e "gnome-shell=$GNOME_SHELL_VERSION"
 apk info -e "mutter=$MUTTER_VERSION"
+apk info -e "gjs=$GJS_VERSION"
 
 rm -rf /var/cache/apk/*
 
