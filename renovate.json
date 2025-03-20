@@ -21,7 +21,7 @@
     {
       "matchHost": "repology.org",
       "concurrentRequestLimit": 1,
-      "maxRequestsPerSecond": 1
+      "maxRequestsPerSecond": 0.5
     }
   ],
   "dockerfile": {
