@@ -13,7 +13,8 @@
       "matchFileNames": [
         "*.dockerfile"
       ],
-      "groupName": "Image dependencies"
+      "groupName": "Image dependencies",
+      "separateMajorMinor": false
     }
   ],
   "hostRules": [
