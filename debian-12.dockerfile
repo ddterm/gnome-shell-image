@@ -9,11 +9,15 @@ ARG MUTTER_VERSION=43.8-0+deb12u1
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='debian_12']
 ARG GJS_VERSION=1.74.2-1+deb12u1
 
+# renovate: datasource=custom.repology depName=vte packageName=vte[repo='debian_12'][srcname='vte2.91']
+ARG VTE_VERSION=0.70.6-2~deb12u1
+
 COPY scripts/install-debian.sh /usr/local/bin/
 RUN env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
+    "VTE_VERSION=$VTE_VERSION" \
     /usr/local/bin/install-debian.sh
 
 COPY data /

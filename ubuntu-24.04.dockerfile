@@ -9,11 +9,15 @@ ARG MUTTER_VERSION=46.2-1ubuntu0.24.04.6
 # renovate: datasource=deb depName=gjs
 ARG GJS_VERSION=1.80.2-1build2
 
+# renovate: datasource=deb depName=vte packageName=libvte-2.91-0
+ARG VTE_VERSION=0.76.0-1ubuntu0.1
+
 COPY scripts/install-debian.sh /usr/local/bin/
 RUN env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
+    "VTE_VERSION=$VTE_VERSION" \
     /usr/local/bin/install-debian.sh
 
 COPY data /

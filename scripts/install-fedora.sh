@@ -6,6 +6,8 @@ locked_packages=(
     "gnome-shell-$GNOME_SHELL_VERSION"
     "mutter-$MUTTER_VERSION"
     "gjs-$GJS_VERSION"
+    "vte291-$VTE_VERSION"
+    "vte291-gtk4-$VTE_VERSION"
 )
 
 packages=(
@@ -13,8 +15,6 @@ packages=(
     gnome-session-xsession
     gnome-extensions-app
     gdm
-    vte291
-    vte291-gtk4
     xorg-x11-server-Xvfb
     mesa-dri-drivers
     wl-clipboard

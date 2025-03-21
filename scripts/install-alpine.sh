@@ -6,6 +6,8 @@ locked_packages="
     gnome-shell=$GNOME_SHELL_VERSION
     mutter=$MUTTER_VERSION
     gjs=$GJS_VERSION
+    vte3=$VTE_VERSION
+    vte3-gtk4=$VTE_VERSION
 "
 
 packages="
@@ -17,8 +19,6 @@ packages="
     mesa
     mesa-dri-gallium
     gdm
-    vte3
-    vte3-gtk4
     libhandy1
     wl-clipboard
 "

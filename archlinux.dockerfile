@@ -9,11 +9,15 @@ ARG MUTTER_VERSION=47.6-1
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='arch']
 ARG GJS_VERSION=2:1.82.1-2
 
+# renovate: datasource=custom.repology depName=vte packageName=vte[repo='arch']
+ARG VTE_VERSION=0.78.4-1
+
 COPY scripts/install-archlinux.sh /usr/local/bin/
 RUN env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
+    "VTE_VERSION=$VTE_VERSION" \
     /usr/local/bin/install-archlinux.sh
 
 COPY data /

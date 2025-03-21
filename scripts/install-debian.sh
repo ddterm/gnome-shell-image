@@ -8,14 +8,19 @@ locked_packages=(
     "gnome-shell=$GNOME_SHELL_VERSION"
     "mutter=$MUTTER_VERSION"
     "gjs=$GJS_VERSION"
+    "gir1.2-vte-2.91=$VTE_VERSION"
 )
+
+if [ "$UBUNTU_CODENAME" != jammy ]
+then
+    locked_packages+=("gir1.2-vte-3.91=$VTE_VERSION")
+fi
 
 packages=(
     "${locked_packages[@]}"
     gnome-session
     dbus-user-session
     gdm3
-    gir1.2-vte-2.91
     xvfb
     wl-clipboard
     gir1.2-handy-1
@@ -24,11 +29,6 @@ packages=(
 if [ "$ID" == ubuntu ]
 then
     packages+=(ubuntu-desktop-minimal)
-fi
-
-if [ "$UBUNTU_CODENAME" != jammy ]
-then
-    packages+=(gir1.2-vte-3.91)
 fi
 
 export DEBIAN_FRONTEND=noninteractive
