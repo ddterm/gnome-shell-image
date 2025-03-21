@@ -4,10 +4,14 @@ set -ex
 
 source /etc/os-release
 
-packages=(
+locked_packages=(
     "gnome-shell=$GNOME_SHELL_VERSION"
     "mutter=$MUTTER_VERSION"
     "gjs=$GJS_VERSION"
+)
+
+packages=(
+    "${locked_packages[@]}"
     gnome-session
     dbus-user-session
     gdm3
@@ -32,6 +36,7 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -y
 apt-get install -y --no-install-recommends "${packages[@]}"
 
-test "$(dpkg-query --showformat='${Version}' --show gnome-shell)" = "$GNOME_SHELL_VERSION"
-test "$(dpkg-query --showformat='${Version}' --show mutter)" = "$MUTTER_VERSION"
-test "$(dpkg-query --showformat='${Version}' --show gjs)" = "$GJS_VERSION"
+for pkg in "${locked_packages[@]}"
+do
+    test "${pkg}" = "$(dpkg-query --showformat='${Package}=${Version}' --show "${pkg%=*}")"
+done
