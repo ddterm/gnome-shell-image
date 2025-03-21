@@ -46,6 +46,54 @@
         "ubuntu-*.dockerfile"
       ],
       "versioning": "deb"
+    },
+    {
+      "matchDatasources": [
+        "deb"
+      ],
+      "matchFileNames": [
+        "ubuntu-22.04.dockerfile"
+      ],
+      "registryUrls": [
+        "http://ftp.ubuntu.com/ubuntu?release=jammy&components=main,universe&binaryArch=amd64",
+        "http://ftp.ubuntu.com/ubuntu?release=jammy-updates&components=main,universe&binaryArch=amd64"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "deb"
+      ],
+      "matchFileNames": [
+        "ubuntu-24.04.dockerfile"
+      ],
+      "registryUrls": [
+        "http://ftp.ubuntu.com/ubuntu?release=noble&components=main,universe&binaryArch=amd64",
+        "http://ftp.ubuntu.com/ubuntu?release=noble-updates&components=main,universe&binaryArch=amd64"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "deb"
+      ],
+      "matchFileNames": [
+        "ubuntu-24.10.dockerfile"
+      ],
+      "registryUrls": [
+        "http://ftp.ubuntu.com/ubuntu?release=oracular&components=main,universe&binaryArch=amd64",
+        "http://ftp.ubuntu.com/ubuntu?release=oracular-updates&components=main,universe&binaryArch=amd64"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "deb"
+      ],
+      "matchFileNames": [
+        "ubuntu-25.04.dockerfile"
+      ],
+      "registryUrls": [
+        "http://ftp.ubuntu.com/ubuntu?release=plucky&components=main,universe&binaryArch=amd64",
+        "http://ftp.ubuntu.com/ubuntu?release=plucky-updates&components=main,universe&binaryArch=amd64"
+      ]
     }
   ],
   "hostRules": [
