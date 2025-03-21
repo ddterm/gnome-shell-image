@@ -16,6 +16,9 @@ RUN env \
     "GJS_VERSION=$GJS_VERSION" \
     /usr/local/bin/install-alpine.sh
 
+COPY scripts/configure-openrc.sh /usr/local/bin/
+RUN /usr/local/bin/configure-openrc.sh
+
 ENV XDG_CURRENT_DESKTOP=GNOME
 
 CMD [ "/sbin/init" ]
