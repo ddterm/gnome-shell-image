@@ -1,12 +1,12 @@
 FROM quay.io/fedora/fedora:40
 
-# renovate: datasource=repology depName=fedora_40/gnome-shell versioning=rpm
+# renovate: datasource=custom.repology.fedora_40 depName=gnome-shell
 ARG GNOME_SHELL_VERSION=46.9-1.fc40
 
-# renovate: datasource=repology depName=fedora_40/mutter versioning=rpm
+# renovate: datasource=custom.repology.fedora_40 depName=mutter
 ARG MUTTER_VERSION=46.8-2.fc40
 
-# renovate: datasource=repology depName=fedora_40/gjs versioning=rpm
+# renovate: datasource=custom.repology.fedora_40 depName=gjs
 ARG GJS_VERSION=1.80.2-3.fc40
 
 COPY scripts/install-fedora.sh /usr/local/bin/

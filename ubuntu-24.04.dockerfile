@@ -1,12 +1,12 @@
 FROM docker.io/library/ubuntu:24.04
 
-# renovate: datasource=repology depName=ubuntu_24_04/gnome-shell versioning=deb
+# renovate: datasource=custom.repology.ubuntu_24_04 depName=gnome-shell
 ARG GNOME_SHELL_VERSION=46.0-0ubuntu6~24.04.6
 
-# renovate: datasource=repology depName=ubuntu_24_04/mutter versioning=deb
+# renovate: datasource=custom.repology.ubuntu_24_04 depName=mutter
 ARG MUTTER_VERSION=46.2-1ubuntu0.24.04.6
 
-# renovate: datasource=repology depName=ubuntu_24_04/gjs versioning=deb
+# renovate: datasource=custom.repology.ubuntu_24_04 depName=gjs
 ARG GJS_VERSION=1.80.2-1build2
 
 COPY scripts/install-debian.sh /usr/local/bin/

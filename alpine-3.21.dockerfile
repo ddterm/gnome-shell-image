@@ -1,12 +1,12 @@
 FROM docker.io/library/alpine:3.21
 
-# renovate: datasource=repology depName=alpine_3_21/gnome-shell versioning=deb
+# renovate: datasource=custom.repology.alpine_3_21 depName=gnome-shell
 ARG GNOME_SHELL_VERSION=47.5-r0
 
-# renovate: datasource=repology depName=alpine_3_21/mutter versioning=deb
+# renovate: datasource=custom.repology.alpine_3_21 depName=mutter
 ARG MUTTER_VERSION=47.6-r0
 
-# renovate: datasource=repology depName=alpine_3_21/gjs versioning=deb
+# renovate: datasource=custom.repology.alpine_3_21 depName=gjs
 ARG GJS_VERSION=1.82.1-r0
 
 COPY scripts/install-alpine.sh /usr/local/bin/

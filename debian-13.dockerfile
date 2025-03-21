@@ -1,12 +1,12 @@
 FROM docker.io/library/debian:trixie
 
-# renovate: datasource=repology depName=debian_13/gnome-shell versioning=deb
+# renovate: datasource=custom.repology.debian_13 depName=gnome-shell
 ARG GNOME_SHELL_VERSION=48~rc-2
 
-# renovate: datasource=repology depName=debian_13/mutter versioning=deb
+# renovate: datasource=custom.repology.debian_13 depName=mutter
 ARG MUTTER_VERSION=48~rc-4
 
-# renovate: datasource=repology depName=debian_13/gjs versioning=deb
+# renovate: datasource=custom.repology.debian_13 depName=gjs
 ARG GJS_VERSION=1.82.1-1
 
 COPY scripts/install-debian.sh /usr/local/bin/

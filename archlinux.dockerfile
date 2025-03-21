@@ -1,12 +1,12 @@
 FROM ghcr.io/archlinux/archlinux:base
 
-# renovate: datasource=repology depName=arch/gnome-shell versioning=deb
+# renovate: datasource=custom.repology.arch depName=gnome-shell
 ARG GNOME_SHELL_VERSION=1:47.5-1
 
-# renovate: datasource=repology depName=arch/mutter versioning=deb
+# renovate: datasource=custom.repology.arch depName=mutter
 ARG MUTTER_VERSION=47.6-1
 
-# renovate: datasource=repology depName=arch/gjs versioning=deb
+# renovate: datasource=custom.repology.arch depName=gjs
 ARG GJS_VERSION=2:1.82.1-2
 
 COPY scripts/install-archlinux.sh /usr/local/bin/
