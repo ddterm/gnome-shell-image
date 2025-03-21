@@ -1,12 +1,12 @@
 FROM docker.io/opensuse/leap:15.6
 
-# renovate: datasource=custom.repology.opensuse_leap_15_6 depName=gnome-shell
+# renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='opensuse_leap_15_6']
 ARG GNOME_SHELL_VERSION=45.3-150600.5.9.2
 
-# renovate: datasource=custom.repology.opensuse_leap_15_6 depName=mutter
+# renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='opensuse_leap_15_6']
 ARG MUTTER_VERSION=45.3-150600.5.9.1
 
-# renovate: datasource=custom.repology.opensuse_leap_15_6 depName=gjs
+# renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='opensuse_leap_15_6']
 ARG GJS_VERSION=1.78.1-150600.1.3
 
 COPY scripts/install-suse.sh /usr/local/bin/

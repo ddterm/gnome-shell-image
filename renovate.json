@@ -9,97 +9,11 @@
     "customManagers:dockerfileVersions"
   ],
   "customDatasources": {
-    "html": {
-      "format": "html"
-    },
-    "repology.alpine_3_18": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
+    "repology": {
+      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{ encodeURIComponent (replace '\\[.*\\]$' '' packageName) }}}",
       "transformTemplates": [
-        "{ 'releases': $[repo='alpine_3_18'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.alpine_3_19": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='alpine_3_19'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.alpine_3_20": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='alpine_3_20'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.alpine_3_21": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='alpine_3_21'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.arch": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='arch'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.debian_12": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='debian_12'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.debian_13": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='debian_13'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.fedora_40": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='fedora_40'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.fedora_41": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='fedora_41'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.opensuse_leap_15_6": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='opensuse_leap_15_6'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.opensuse_tumbleweed": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='opensuse_tumbleweed'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.ubuntu_22_04": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='ubuntu_22_04'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.ubuntu_24_04": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='ubuntu_24_04'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.ubuntu_24_10": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='ubuntu_24_10'].{ 'version': origversion }[] }"
-      ]
-    },
-    "repology.ubuntu_25_04": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{encodeURIComponent packageName}}}",
-      "transformTemplates": [
-        "{ 'releases': $[repo='ubuntu_25_04'].{ 'version': origversion }[] }"
+        "${{{ replace '^[^\\[]*' '' packageName }}}[]",
+        "{ 'releases': $.{ 'version': origversion }[] }"
       ]
     }
   },
@@ -113,17 +27,23 @@
     },
     {
       "matchDatasources": [
-        "custom.repology.alpine_*",
-        "custom.repology.arch",
-        "custom.repology.fedora_*",
-        "custom.repology.opensuse_*"
+        "custom.repology"
+      ],
+      "matchFileNames": [
+        "alpine-*.dockerfile",
+        "archlinux.dockerfile",
+        "fedora-*.dockerfile",
+        "opensuse-*.dockerfile"
       ],
       "versioning": "rpm"
     },
     {
       "matchDatasources": [
-        "custom.repology.debian_*",
-        "custom.repology.ubuntu_*"
+        "custom.repology"
+      ],
+      "matchFileNames": [
+        "debian-*.dockerfile",
+        "ubuntu-*.dockerfile"
       ],
       "versioning": "deb"
     }
