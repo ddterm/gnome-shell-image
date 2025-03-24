@@ -100,9 +100,7 @@
     {
       "matchHost": "repology.org",
       "concurrentRequestLimit": 1,
-      "maxRequestsPerSecond": 0.5
-    },
-    {
+      "maxRequestsPerSecond": 0.5,
       "abortOnError": true
     }
   ],
