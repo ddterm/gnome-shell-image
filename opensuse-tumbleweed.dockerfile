@@ -1,7 +1,7 @@
 FROM docker.io/opensuse/tumbleweed:latest
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='opensuse_tumbleweed']
-ARG GNOME_SHELL_VERSION=48.0-2.1
+ARG GNOME_SHELL_VERSION=48.0+6-1.1
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='opensuse_tumbleweed']
 ARG MUTTER_VERSION=48.0+5-1.1
