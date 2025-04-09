@@ -7,7 +7,7 @@ ARG GNOME_SHELL_VERSION=48.0+6-1.1
 ARG MUTTER_VERSION=48.1-1.1
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='opensuse_tumbleweed']
-ARG GJS_VERSION=1.84.1-1.1
+ARG GJS_VERSION=1.84.1-2.1
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='opensuse_tumbleweed']
 ARG VTE_VERSION=0.80.0-1.1
