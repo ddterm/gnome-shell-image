@@ -4,7 +4,7 @@ FROM docker.io/opensuse/leap:15.6
 ARG GNOME_SHELL_VERSION=45.3-150600.5.9.2
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='opensuse_leap_15_6']
-ARG MUTTER_VERSION=45.3-150600.5.9.1
+ARG MUTTER_VERSION=45.3-150600.5.12.2
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='opensuse_leap_15_6']
 ARG GJS_VERSION=1.78.1-150600.1.3
