@@ -1,7 +1,7 @@
 FROM docker.io/library/ubuntu:24.10
 
 # renovate: datasource=deb depName=gnome-shell
-ARG GNOME_SHELL_VERSION=47.0-2ubuntu3.24.10.1
+ARG GNOME_SHELL_VERSION=47.0-2ubuntu3.24.10.2
 
 # renovate: datasource=deb depName=mutter
 ARG MUTTER_VERSION=47.0-1ubuntu4.4

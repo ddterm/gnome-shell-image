@@ -4,10 +4,10 @@ FROM quay.io/fedora/fedora:41
 ARG GNOME_SHELL_VERSION=47.5-1.fc41
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='fedora_41']
-ARG MUTTER_VERSION=47.6-1.fc41
+ARG MUTTER_VERSION=47.7-1.fc41
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='fedora_41']
-ARG GJS_VERSION=1.82.1-3.fc41
+ARG GJS_VERSION=1.82.3-1.fc41
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='fedora_41']
 ARG VTE_VERSION=0.78.4-1.fc41
