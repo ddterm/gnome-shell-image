@@ -9,12 +9,8 @@ locked_packages=(
     "mutter=$MUTTER_VERSION"
     "gjs=$GJS_VERSION"
     "gir1.2-vte-2.91=$VTE_VERSION"
+    "gir1.2-vte-3.91=$VTE_VERSION"
 )
-
-if [ "$UBUNTU_CODENAME" != jammy ]
-then
-    locked_packages+=("gir1.2-vte-3.91=$VTE_VERSION")
-fi
 
 packages=(
     "${locked_packages[@]}"
