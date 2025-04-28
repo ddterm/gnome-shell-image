@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=48.1-2
 ARG GJS_VERSION=1.82.1-1
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='debian_13'][srcname='vte2.91']
-ARG VTE_VERSION=0.80.0-1
+ARG VTE_VERSION=0.80.1-1
 
 COPY scripts/install-debian.sh /usr/local/bin/
 RUN env \
