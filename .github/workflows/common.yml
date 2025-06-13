@@ -28,7 +28,6 @@ jobs:
           - alpine-3.20
           - alpine-3.21
           - alpine-3.22
-          - fedora-40
           - fedora-41
           - fedora-42
           - debian-13
