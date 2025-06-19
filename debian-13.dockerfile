@@ -4,7 +4,7 @@ FROM docker.io/library/debian:trixie
 ARG GNOME_SHELL_VERSION=48.2-3
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='debian_13']
-ARG MUTTER_VERSION=48.2-1
+ARG MUTTER_VERSION=48.3.1-2
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='debian_13']
 ARG GJS_VERSION=1.82.3-1
