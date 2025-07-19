@@ -7,10 +7,10 @@ ARG GNOME_SHELL_VERSION=48.3-1.fc42
 ARG MUTTER_VERSION=48.4-1.fc42
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='fedora_42']
-ARG GJS_VERSION=1.82.1-4.fc42
+ARG GJS_VERSION=1.84.2-2.fc42
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='fedora_42']
-ARG VTE_VERSION=0.80.2-2.fc42
+ARG VTE_VERSION=0.80.3-1.fc42
 
 COPY scripts/install-fedora.sh /usr/local/bin/
 RUN env \
