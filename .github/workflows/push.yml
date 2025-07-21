@@ -17,4 +17,4 @@ permissions:
 
 jobs:
   ci:
-    uses: ./.github/workflows/common.yml
+    uses: ./.github/workflows/build.yml

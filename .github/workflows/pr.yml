@@ -9,7 +9,7 @@ on:
 
 jobs:
   ci:
-    if: ${{ github.event.pull_request.base.repo.node_id != github.event.pull_request.head.repo.node_id }}
-    uses: ./.github/workflows/common.yml
+    if: github.event.pull_request.base.repo.node_id != github.event.pull_request.head.repo.node_id
+    uses: ./.github/workflows/build.yml
     with:
       push: false

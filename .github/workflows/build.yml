@@ -1,14 +1,7 @@
+name: build
 concurrency: ${{ github.workflow }}/${{ github.ref }}
 
 on:
-  workflow_dispatch:
-    inputs:
-      push:
-        description: "Push built image"
-        default: true
-        required: false
-        type: boolean
-
   workflow_call:
     inputs:
       push:
@@ -17,30 +10,34 @@ on:
         required: false
         type: boolean
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
-  build-test:
+  setup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      names: ${{ steps.names.outputs.names }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: names
+        run: echo "names=$(find . -maxdepth 1 -type f -name '*.dockerfile' -printf '%P\n' | sort | jq -cnR '[inputs | sub("\\.[^.]+?$"; "")]')" | tee "$GITHUB_OUTPUT"
+
+  image:
+    needs: setup
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        image:
-          - alpine-3.19
-          - alpine-3.20
-          - alpine-3.21
-          - alpine-3.22
-          - fedora-41
-          - fedora-42
-          - debian-13
-          - ubuntu-24.04
-          - ubuntu-24.10
-          - ubuntu-25.04
-          - archlinux
-          - opensuse-tumbleweed
-          - opensuse-leap-15.6
+        name: ${{ fromJSON(needs.setup.outputs.names) }}
 
     timeout-minutes: 15
     env:
-      IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.image }}
+      IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.name }}
 
     steps:
       - uses: actions/checkout@v4
@@ -60,7 +57,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ${{ matrix.image }}.dockerfile
+          file: ${{ matrix.name }}.dockerfile
           pull: true
           push: ${{ inputs.push }}
           tags: ${{ steps.docker_meta.outputs.tags }}
@@ -68,22 +65,29 @@ jobs:
           annotations: ${{ steps.docker_meta.outputs.annotations }}
           cache-from: |
             ${{ steps.docker_meta.outputs.tags }}
-            ${{ env.IMAGE }}:master
+            ${{ env.IMAGE }}:${{ github.event.repository.default_branch }}
           cache-to: type=inline
 
-      - run: podman pull docker-daemon:${{ steps.docker_build.outputs.imageid }} | tee .podman-image-id
+      - id: podman_pull
+        run: podman pull "docker-daemon:$IMAGE_ID" | sed 's/^/imageid=/' | tee "$GITHUB_OUTPUT"
+        env:
+          IMAGE_ID: ${{ steps.docker_build.outputs.imageid }}
 
       - id: gnome-session-x11
         name: Test gnome-session-x11
-        run: test/test-x11.sh $(cat .podman-image-id)
+        run: test/test-x11.sh "$IMAGE_ID"
+        env:
+          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
 
       - id: gnome-session-wayland
         name: Test gnome-session-wayland
-        run: test/test-wayland.sh $(cat .podman-image-id)
+        run: test/test-wayland.sh "$IMAGE_ID"
+        env:
+          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
 
       - name: Upload screenshot
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.image }}-screenshots
+          name: ${{ matrix.name }}-screenshots
           path: test/*.png
-        if: ${{ always() }}
+        if: always() && steps.podman_pull.outcome == 'success'
