@@ -7,10 +7,6 @@ on:
       - master
     tags:
       - "*"
-    paths-ignore:
-      - renovate.json
-      - README.md
-      - LICENSE
 
 permissions:
   packages: write
