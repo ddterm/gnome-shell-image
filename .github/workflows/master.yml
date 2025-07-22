@@ -6,15 +6,16 @@ on:
     branches:
       - master
 
-permissions:
-  packages: write
-
 jobs:
-  ci:
+  build:
     uses: ./.github/workflows/build.yml
-  tag:
-    needs: ci
-    uses: ./.github/workflows/tag.yml
+    permissions:
+      contents: read
+      packages: write
+
+  release:
+    needs: build
+    uses: ./.github/workflows/release.yml
     permissions:
       contents: write
       actions: write

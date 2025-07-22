@@ -1,0 +1,54 @@
+name: release
+
+on:
+  workflow_call:
+    inputs:
+      dry-run:
+        description: "Don't create release, just print messages"
+        default: false
+        required: false
+        type: boolean
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+
+    steps:
+      - id: prefix
+        run: echo "prefix=$(date --utc '+%Y.%m.%d.')" | tee "$GITHUB_OUTPUT"
+
+      - id: existing-tags
+        run: |
+          EXISTING="$(gh api "/repos/$GH_REPO/git/matching-refs/tags/$PREFIX" | jq -c '[.[].ref]')"
+          echo "refs=$EXISTING" | tee "$GITHUB_OUTPUT"
+
+        env:
+          PREFIX: ${{ steps.prefix.outputs.prefix }}
+
+      - id: version
+        run: |
+          BUILD="$(echo "$EXISTING" | jq -c 'map(capture("\\.(?<n>[0-9]+)$") | .n | tonumber + 1) | . + [0] | max')"
+
+          echo "build=$BUILD" | tee "$GITHUB_OUTPUT"
+          echo "version=$PREFIX$BUILD" | tee "$GITHUB_OUTPUT"
+
+        env:
+          PREFIX: ${{ steps.prefix.outputs.prefix }}
+          EXISTING: ${{ steps.existing-tags.outputs.refs }}
+
+      - if: ${{ !inputs.dry-run }}
+        run: gh release create "$VERSION" --target "$GITHUB_SHA" --generate-notes --fail-on-no-commits
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+
+      - if: ${{ !inputs.dry-run }}
+        run: gh workflow run push.yml --ref "refs/tags/$VERSION"
+        env:
+          VERSION: ${{ steps.version.outputs.version }}

@@ -9,9 +9,16 @@ on:
     tags:
       - "*"
 
-permissions:
-  packages: write
-
 jobs:
-  ci:
+  build:
     uses: ./.github/workflows/build.yml
+    permissions:
+      contents: read
+      packages: write
+
+  release:
+    uses: ./.github/workflows/release.yml
+    with:
+      dry-run: true
+    permissions:
+      contents: read
