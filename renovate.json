@@ -4,8 +4,6 @@
     "config:recommended",
     ":maintainLockFilesWeekly",
     "npm:unpublishSafe",
-    ":automergeAll",
-    "schedule:automergeDaily",
     "customManagers:dockerfileVersions"
   ],
   "customDatasources": {
@@ -23,7 +21,11 @@
         "*.dockerfile"
       ],
       "groupName": "Image dependencies",
-      "separateMajorMinor": false
+      "separateMajorMinor": false,
+      "extends": [
+        ":automergeAll",
+        "schedule:automergeDaily"
+      ]
     },
     {
       "matchDatasources": [
