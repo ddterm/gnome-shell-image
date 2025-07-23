@@ -18,27 +18,50 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
-      names: ${{ steps.names.outputs.names }}
+      images: ${{ steps.images.outputs.names }}
+      keep-tags: ${{ steps.keep-tags.outputs.tags }}
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
 
-      - id: names
+      - id: images
         run: echo "names=$(find . -maxdepth 1 -type f -name '*.dockerfile' -printf '%P\n' | sort | jq -cnR '[inputs | sub("\\.[^.]+?$"; "")]')" | tee "$GITHUB_OUTPUT"
+
+      - id: keep-tags
+        run: >-
+          {
+            echo "tags<<*EOF*";
+            {
+              git for-each-ref --format='%(refname:strip=3)' refs/remotes;
+              git for-each-ref --format='%(refname:strip=2)' refs/tags;
+              gh pr list --template '{{range .}}pr-{{.number}}{{"\n"}}{{end}}' --json number;
+            } | sed -E 's/[^a-zA-Z0-9._-]+/-/g';
+            echo "*EOF*";
+          } | tee "$GITHUB_OUTPUT"
 
   image:
     needs: setup
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        name: ${{ fromJSON(needs.setup.outputs.names) }}
-
-    timeout-minutes: 15
+        image: ${{ fromJSON(needs.setup.outputs.images) }}
 
     steps:
-      - uses: amezin/container-registry-prune-action@74a1459e57a1ed9de91138ef48832e57d8ebaa00 # v0.1.0
+      - uses: amezin/container-registry-prune-action@35bcd5aa1a0c3a76318c058682cb6be9dc231754 # v0.2.1
         with:
-          name: ${{ github.event.repository.name }}/${{ matrix.name }}
+          name: ${{ github.event.repository.name }}/${{ matrix.image }}
+          tag-patterns: |
+            ${{ needs.setup.outputs.keep-tags }}
+            latest
+          matching-tags-retention-duration: 1y
+          mismatching-tags-retention-duration: 1d
           untagged-retention-duration: 1d
           dry-run: ${{ inputs.dry-run }}
