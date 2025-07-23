@@ -1,0 +1,27 @@
+name: test-cleanup
+concurrency: ${{ github.workflow }}/${{ github.ref }}
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/cleanup.yml
+      - .github.workflows/test-cleanup.yml
+  push:
+    branches-ignore:
+      - master
+    tags:
+      - "*"
+    paths:
+      - .github/workflows/cleanup.yml
+      - .github.workflows/test-cleanup.yml
+
+jobs:
+  cleanup:
+    if: >-
+      !github.event.pull_request || github.event.pull_request.base.repo.node_id != github.event.pull_request.head.repo.node_id
+    uses: ./.github/workflows/cleanup.yml
+    with:
+      dry-run: true
+    permissions:
+      contents: read
+      packages: read

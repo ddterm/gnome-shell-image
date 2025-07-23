@@ -1,0 +1,44 @@
+name: cleanup
+
+on:
+  workflow_call:
+    inputs:
+      dry-run:
+        description: "Don't delete images, just print messages"
+        default: false
+        required: false
+        type: boolean
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  setup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      names: ${{ steps.names.outputs.names }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: names
+        run: echo "names=$(find . -maxdepth 1 -type f -name '*.dockerfile' -printf '%P\n' | sort | jq -cnR '[inputs | sub("\\.[^.]+?$"; "")]')" | tee "$GITHUB_OUTPUT"
+
+  image:
+    needs: setup
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        name: ${{ fromJSON(needs.setup.outputs.names) }}
+
+    timeout-minutes: 15
+
+    steps:
+      - uses: amezin/container-registry-prune-action@v0.1.0
+        with:
+          name: ${{ github.event.repository.name }}/${{ matrix.name }}
+          untagged-retention-duration: 1d
+          dry-run: ${{ inputs.dry-run }}

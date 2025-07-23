@@ -1,0 +1,14 @@
+name: schedule-cleanup
+concurrency: ${{ github.workflow }}/${{ github.ref }}
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 33 6 * * *
+
+jobs:
+  cleanup:
+    uses: ./.github/workflows/cleanup.yml
+    permissions:
+      contents: read
+      packages: write
