@@ -21,7 +21,7 @@ jobs:
       names: ${{ steps.names.outputs.names }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - id: names
         run: echo "names=$(find . -maxdepth 1 -type f -name '*.dockerfile' -printf '%P\n' | sort | jq -cnR '[inputs | sub("\\.[^.]+?$"; "")]')" | tee "$GITHUB_OUTPUT"
@@ -37,7 +37,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: amezin/container-registry-prune-action@v0.1.0
+      - uses: amezin/container-registry-prune-action@74a1459e57a1ed9de91138ef48832e57d8ebaa00 # v0.1.0
         with:
           name: ${{ github.event.repository.name }}/${{ matrix.name }}
           untagged-retention-duration: 1d
