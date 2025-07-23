@@ -1,4 +1,5 @@
 name: master
+concurrency: ${{ github.workflow }}/${{ github.ref }}
 
 on:
   push:

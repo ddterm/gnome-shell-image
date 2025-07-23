@@ -1,5 +1,4 @@
 name: build
-concurrency: ${{ github.workflow }}/${{ github.ref }}
 
 on:
   workflow_call:

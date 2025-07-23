@@ -1,4 +1,5 @@
 name: pr
+concurrency: ${{ github.workflow }}/${{ github.ref }}
 
 on:
   - pull_request
