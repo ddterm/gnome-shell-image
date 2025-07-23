@@ -82,6 +82,10 @@
         "http://ftp.ubuntu.com/ubuntu?release=plucky&components=main,universe&binaryArch=amd64",
         "http://ftp.ubuntu.com/ubuntu?release=plucky-updates&components=main,universe&binaryArch=amd64"
       ]
+    },
+    {
+      "extends": ["helpers:pinGitHubActionDigests"],
+      "versioning": "npm"
     }
   ],
   "hostRules": [
