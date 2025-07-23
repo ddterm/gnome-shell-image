@@ -84,7 +84,7 @@
       ]
     },
     {
-      "extends": ["helpers:pinGitHubActionDigests"],
+      "extends": ["helpers:pinGitHubActionDigests", ":pinVersions"],
       "versioning": "npm"
     }
   ],
