@@ -50,7 +50,6 @@ jobs:
 
       - id: should-release
         uses: amezin/compare-commit-files-action@dc331422131f743fcb2a4174ad5c74f719b69580 # v1.0.3
-        continue-on-error: true
         with:
           files: |
             # Don't autorelease on CI changes. If necessary, a release can be created manually
@@ -60,13 +59,13 @@ jobs:
             scripts/**
           base: ${{ steps.latest.outputs.latest }}
 
-      - if: ${{ !inputs.dry-run && steps.should-release.outputs.changed != 'false' }}
+      - if: ${{ !inputs.dry-run && fromJSON(steps.should-release.outputs.changed) }}
         run: gh release create "$VERSION" --target "$GITHUB_SHA" --generate-notes --fail-on-no-commits --notes-start-tag "$LATEST"
         env:
           VERSION: ${{ steps.version.outputs.version }}
           LATEST: ${{ steps.latest.outputs.latest }}
 
-      - if: ${{ !inputs.dry-run && steps.should-release.outputs.changed != 'false' }}
+      - if: ${{ !inputs.dry-run && fromJSON(steps.should-release.outputs.changed) }}
         run: gh workflow run push.yml --ref "refs/tags/$VERSION"
         env:
           VERSION: ${{ steps.version.outputs.version }}
