@@ -2,15 +2,12 @@ name: test-cleanup
 concurrency: ${{ github.workflow }}/${{ github.ref }}
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - .github/workflows/cleanup.yml
       - .github.workflows/test-cleanup.yml
   push:
-    branches-ignore:
-      - master
-    tags:
-      - "*"
     paths:
       - .github/workflows/cleanup.yml
       - .github.workflows/test-cleanup.yml
