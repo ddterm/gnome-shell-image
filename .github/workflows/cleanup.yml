@@ -53,6 +53,14 @@ jobs:
       fail-fast: false
       matrix:
         image: ${{ fromJSON(needs.setup.outputs.images) }}
+        include:
+          - image: fedora-40
+          - image: debian-12
+          - image: ubuntu-24.10
+          - image: ubuntu-22.04
+          - image: fedora-39
+          - image: centos-stream9
+          - image: alpine-3.18
 
     steps:
       - uses: amezin/container-registry-prune-action@35bcd5aa1a0c3a76318c058682cb6be9dc231754 # v0.2.1
