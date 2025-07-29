@@ -26,7 +26,7 @@ jobs:
 
       - id: existing-tags
         run: |
-          EXISTING="$(gh api "/repos/$GH_REPO/git/matching-refs/tags/$PREFIX" | jq -c '[.[].ref]')"
+          EXISTING="$(gh api "/repos/{owner}/{repo}/git/matching-refs/tags/$PREFIX" | jq -c '[.[].ref]')"
           echo "refs=$EXISTING" | tee "$GITHUB_OUTPUT"
 
         env:
