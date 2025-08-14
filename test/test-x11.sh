@@ -49,7 +49,7 @@ podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" sh -c "Xvfb -screen 0
 
 read -r DISPLAY_NUMBER <"${SHARED_DIR}/display_pipe"
 
-podman exec "--user=$(id -u)" "${ENV_VARS[@]/#/--env=}" "--env=DISPLAY=:$DISPLAY_NUMBER" "$CID" gnome-shell --x11 --sm-disable --unsafe-mode &
+podman exec "--user=$(id -u)" "${ENV_VARS[@]/#/--env=}" "--env=DISPLAY=:$DISPLAY_NUMBER" "$CID" gnome-shell --x11 --unsafe-mode &
 
 env "${ENV_VARS[@]}" gdbus wait --session --timeout=60 org.gnome.Shell.Screenshot
 

@@ -45,7 +45,7 @@ podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" dbus-daemon --session
 env "${ENV_VARS[@]}" dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.Peer.Ping
 
 podman exec "$CID" mkdir -p -m 01777 /tmp/.X11-unix  # required for Alpine only
-podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" gnome-shell --wayland --headless --sm-disable --unsafe-mode --virtual-monitor 1600x960 &
+podman exec "--user=$UID" "${ENV_VARS[@]/#/--env=}" "$CID" gnome-shell --wayland --headless --unsafe-mode --virtual-monitor 1600x960 &
 
 env "${ENV_VARS[@]}" gdbus wait --session --timeout=60 org.gnome.Shell.Screenshot
 
