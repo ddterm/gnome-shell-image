@@ -74,15 +74,24 @@ jobs:
         env:
           IMAGE_ID: ${{ steps.docker_build.outputs.imageid }}
 
-      - id: gnome-session-x11
-        name: Test gnome-session-x11
-        run: test/test-x11.sh "$IMAGE_ID"
-        env:
-          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
-
       - id: gnome-session-wayland
         name: Test gnome-session-wayland
         run: test/test-wayland.sh "$IMAGE_ID"
+        env:
+          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
+
+      - id: has-x11
+        name: Check if X11 is available
+        run: |
+          cli_arg="$(podman run --rm "$IMAGE_ID" gnome-shell --help | grep -qF -- '--x11' && echo 1 || echo 0)"
+          echo "cli_arg=$cli_arg" | tee "$GITHUB_OUTPUT"
+        env:
+          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
+
+      - id: gnome-session-x11
+        name: Test gnome-session-x11
+        run: test/test-x11.sh "$IMAGE_ID"
+        if: fromJSON(steps.has-x11.outputs.cli_arg)
         env:
           IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
 
