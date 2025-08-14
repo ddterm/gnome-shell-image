@@ -66,18 +66,6 @@
         "deb"
       ],
       "matchFileNames": [
-        "ubuntu-24.10.dockerfile"
-      ],
-      "registryUrls": [
-        "http://ftp.ubuntu.com/ubuntu?release=oracular&components=main,universe&binaryArch=amd64",
-        "http://ftp.ubuntu.com/ubuntu?release=oracular-updates&components=main,universe&binaryArch=amd64"
-      ]
-    },
-    {
-      "matchDatasources": [
-        "deb"
-      ],
-      "matchFileNames": [
         "ubuntu-25.04.dockerfile"
       ],
       "registryUrls": [
