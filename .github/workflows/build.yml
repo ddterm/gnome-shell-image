@@ -68,7 +68,9 @@ jobs:
           cache-to: type=inline
 
       - id: podman_pull
-        run: podman pull "docker-daemon:$IMAGE_ID" | sed 's/^/imageid=/' | tee "$GITHUB_OUTPUT"
+        run: |
+          imageid="$(podman pull "docker-daemon:$IMAGE_ID")"
+          echo "imageid=$imageid" | tee "$GITHUB_OUTPUT"
         env:
           IMAGE_ID: ${{ steps.docker_build.outputs.imageid }}
 
