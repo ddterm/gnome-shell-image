@@ -1,13 +1,13 @@
 FROM docker.io/library/ubuntu:25.10
 
 # renovate: datasource=deb depName=gnome-shell
-ARG GNOME_SHELL_VERSION=49~beta-0ubuntu1
+ARG GNOME_SHELL_VERSION=49~beta.1-0ubuntu2
 
 # renovate: datasource=deb depName=mutter
 ARG MUTTER_VERSION=49~beta-0ubuntu1
 
 # renovate: datasource=deb depName=gjs
-ARG GJS_VERSION=1.85.1-2
+ARG GJS_VERSION=1.85.2-1
 
 # renovate: datasource=deb depName=vte packageName=libvte-2.91-0
 ARG VTE_VERSION=0.80.3-2
