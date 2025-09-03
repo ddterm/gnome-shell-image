@@ -12,6 +12,9 @@ ARG GJS_VERSION=1.82.1-1
 # renovate: datasource=deb depName=vte packageName=libvte-2.91-0
 ARG VTE_VERSION=0.80.0-1
 
+COPY scripts/enable-proposed.sh /usr/local/bin/
+RUN /usr/local/bin/enable-proposed.sh
+
 COPY scripts/install-debian.sh /usr/local/bin/
 RUN env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
