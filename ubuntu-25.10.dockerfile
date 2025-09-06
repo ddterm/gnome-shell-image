@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=49~rc-0ubuntu2
 ARG GJS_VERSION=1.85.2-2
 
 # renovate: datasource=deb depName=vte packageName=libvte-2.91-0
-ARG VTE_VERSION=0.80.3-2
+ARG VTE_VERSION=0.80.3-3
 
 COPY scripts/install-debian.sh /usr/local/bin/
 RUN env \
