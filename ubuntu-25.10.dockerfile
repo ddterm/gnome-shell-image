@@ -7,7 +7,7 @@ ARG GNOME_SHELL_VERSION=49~rc-0ubuntu1
 ARG MUTTER_VERSION=49~rc-0ubuntu2
 
 # renovate: datasource=deb depName=gjs
-ARG GJS_VERSION=1.85.2-2
+ARG GJS_VERSION=1.85.90-4
 
 # renovate: datasource=deb depName=vte packageName=libvte-2.91-0
 ARG VTE_VERSION=0.80.3-3
