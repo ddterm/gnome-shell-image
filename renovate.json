@@ -94,8 +94,11 @@
     {
       "matchHost": "repology.org",
       "concurrentRequestLimit": 1,
-      "maxRequestsPerSecond": 0.5,
-      "abortOnError": true
+      "maxRequestsPerSecond": 0.1,
+      "abortOnError": true,
+      "keepAlive": true,
+      "enableHttp2": true,
+      "timeout": 300000
     }
   ],
   "dockerfile": {
