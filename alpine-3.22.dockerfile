@@ -1,10 +1,10 @@
 FROM docker.io/library/alpine:3.22
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='alpine_3_22']
-ARG GNOME_SHELL_VERSION=48.4-r0
+ARG GNOME_SHELL_VERSION=48.5-r0
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='alpine_3_22']
-ARG MUTTER_VERSION=48.4-r0
+ARG MUTTER_VERSION=48.5-r0
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='alpine_3_22']
 ARG GJS_VERSION=1.84.2-r1
