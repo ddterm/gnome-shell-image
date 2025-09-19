@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=48.5-r0
 ARG GJS_VERSION=1.84.2-r1
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='alpine_3_22']
-ARG VTE_VERSION=0.80.3-r0
+ARG VTE_VERSION=0.80.4-r0
 
 COPY scripts/install-alpine.sh /usr/local/bin/
 RUN env \
