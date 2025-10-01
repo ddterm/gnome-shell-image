@@ -24,11 +24,6 @@ packages=(
     wl-clipboard
 )
 
-if [ "$ID" = "opensuse-tumbleweed" ]
-then
-    packages+=(gnome-session-xsession)
-fi
-
 zypper --non-interactive install --no-recommends -f "${packages[@]}"
 
 for pkg in "${locked_packages[@]}"
