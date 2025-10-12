@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=49.0-5
 ARG GJS_VERSION=2:1.86.0-1
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='arch']
-ARG VTE_VERSION=0.82.0-2
+ARG VTE_VERSION=0.82.1-1
 
 COPY scripts/install-archlinux.sh /usr/local/bin/
 RUN env \
