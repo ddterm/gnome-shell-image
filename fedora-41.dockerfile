@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=47.9-1.fc41
 ARG GJS_VERSION=1.82.3-1.fc41
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='fedora_41']
-ARG VTE_VERSION=0.78.5-1.fc41
+ARG VTE_VERSION=0.78.6-1.fc41
 
 COPY scripts/install-fedora.sh /usr/local/bin/
 RUN env \
