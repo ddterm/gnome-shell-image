@@ -4,7 +4,7 @@ FROM docker.io/opensuse/tumbleweed:latest
 ARG GNOME_SHELL_VERSION=49.1-1.1
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='opensuse_tumbleweed']
-ARG MUTTER_VERSION=49.1-1.1
+ARG MUTTER_VERSION=49.1.1-1.1
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='opensuse_tumbleweed']
 ARG GJS_VERSION=1.86.0-1.1
