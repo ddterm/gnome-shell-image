@@ -1,7 +1,7 @@
 FROM ghcr.io/archlinux/archlinux:base
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='arch']
-ARG GNOME_SHELL_VERSION=1:49.1-1
+ARG GNOME_SHELL_VERSION=1:49.1-2
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='arch']
 ARG MUTTER_VERSION=49.1.1-1
