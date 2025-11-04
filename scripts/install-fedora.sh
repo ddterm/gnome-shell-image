@@ -2,6 +2,8 @@
 
 set -ex
 
+source /etc/os-release
+
 locked_packages=(
     "gnome-shell-$GNOME_SHELL_VERSION"
     "mutter-$MUTTER_VERSION"
@@ -12,7 +14,6 @@ locked_packages=(
 
 packages=(
     "${locked_packages[@]}"
-    gnome-session-xsession
     gnome-extensions-app
     gdm
     xorg-x11-server-Xvfb
@@ -20,6 +21,10 @@ packages=(
     wl-clipboard
     libhandy
 )
+
+if (( VERSION_ID < 43 )); then
+    packages+=(gnome-session-xsession)
+fi
 
 dnf install -y --nodocs --setopt install_weak_deps=False "${packages[@]}"
 
