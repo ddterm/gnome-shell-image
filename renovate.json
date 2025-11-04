@@ -3,7 +3,7 @@
   "extends": [
     "config:recommended",
     ":maintainLockFilesWeekly",
-    "npm:unpublishSafe",
+    "security:minimumReleaseAgeNpm",
     "customManagers:dockerfileVersions"
   ],
   "customDatasources": {
@@ -86,7 +86,10 @@
       ]
     },
     {
-      "extends": ["helpers:pinGitHubActionDigests", ":pinVersions"],
+      "extends": [
+        "helpers:pinGitHubActionDigests",
+        ":pinVersions"
+      ],
       "versioning": "npm"
     }
   ],
