@@ -83,7 +83,7 @@ jobs:
       - id: has-x11
         name: Check if X11 is available
         run: |
-          cli_arg="$(podman run --rm "$IMAGE_ID" gnome-shell --help | grep -qF -- '--x11' && echo 1 || echo 0)"
+          cli_arg="$(podman run --rm "$IMAGE_ID" gnome-shell --help | grep -qF -- '--x11' && podman run --rm "$IMAGE_ID" sh -c 'command -V Xvfb >/dev/null' && echo 1 || echo 0)"
           echo "cli_arg=$cli_arg" | tee "$GITHUB_OUTPUT"
         env:
           IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}

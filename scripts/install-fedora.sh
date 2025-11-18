@@ -16,14 +16,22 @@ packages=(
     "${locked_packages[@]}"
     gnome-extensions-app
     gdm
-    xorg-x11-server-Xvfb
     mesa-dri-drivers
     wl-clipboard
     libhandy
 )
 
-if (( VERSION_ID < 43 )); then
-    packages+=(gnome-session-xsession)
+if [ "$ID" = fedora ]; then
+    packages+=(xorg-x11-server-Xvfb)
+
+    if (( VERSION_ID < 43 )); then
+        packages+=(gnome-session-xsession)
+    fi
+fi
+
+if [ "$ID" = centos ]; then
+    dnf config-manager --set-enabled crb
+    dnf install -y epel-release
 fi
 
 dnf install -y --nodocs --setopt install_weak_deps=False "${packages[@]}"
