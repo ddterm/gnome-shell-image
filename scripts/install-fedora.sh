@@ -14,6 +14,7 @@ locked_packages=(
 
 packages=(
     "${locked_packages[@]}"
+    dbus-daemon
     gnome-extensions-app
     gdm
     mesa-dri-drivers
