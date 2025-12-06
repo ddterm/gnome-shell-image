@@ -1,10 +1,10 @@
 FROM quay.io/fedora/fedora:42
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='fedora_42']
-ARG GNOME_SHELL_VERSION=48.6-1.fc42
+ARG GNOME_SHELL_VERSION=48.7-1.fc42
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='fedora_42']
-ARG MUTTER_VERSION=48.6-1.fc42
+ARG MUTTER_VERSION=48.7-1.fc42
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='fedora_42']
 ARG GJS_VERSION=1.84.2-2.fc42
