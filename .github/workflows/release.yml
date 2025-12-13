@@ -49,7 +49,7 @@ jobs:
           echo "latest=$LATEST" | tee "$GITHUB_OUTPUT"
 
       - id: should-release
-        uses: amezin/compare-commit-files-action@dc331422131f743fcb2a4174ad5c74f719b69580 # v1.0.3
+        uses: amezin/compare-commit-files-action@4bfd343535626a745cc7fc8f5e9b60a8b87f5a45 # v2.0.0
         with:
           files: |
             # Don't autorelease on CI changes. If necessary, a release can be created manually
