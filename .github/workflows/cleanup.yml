@@ -58,7 +58,6 @@ jobs:
           - image: debian-12
           - image: ubuntu-24.10
           - image: ubuntu-22.04
-          - image: centos-stream9
           - image: alpine-3.18
           - image: alpine-3.19
 
