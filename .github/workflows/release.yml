@@ -49,7 +49,7 @@ jobs:
           echo "latest=$LATEST" | tee "$GITHUB_OUTPUT"
 
       - id: should-release
-        uses: amezin/compare-commit-files-action@4bfd343535626a745cc7fc8f5e9b60a8b87f5a45 # v2.0.0
+        uses: amezin/detect-changes-action@27a74106815e1e2a9e93a0a28f278736fd144c24 # v2.2.0
         with:
           files: |
             # Don't autorelease on CI changes. If necessary, a release can be created manually
@@ -58,6 +58,7 @@ jobs:
             data/**
             scripts/**
           base: ${{ steps.latest.outputs.latest }}
+          ignore-removed: true
 
       - if: ${{ !inputs.dry-run && fromJSON(steps.should-release.outputs.changed) }}
         run: gh release create "$VERSION" --target "$GITHUB_SHA" --generate-notes --fail-on-no-commits --notes-start-tag "$LATEST"
