@@ -62,7 +62,7 @@ jobs:
           - image: alpine-3.19
 
     steps:
-      - uses: amezin/container-registry-prune-action@35bcd5aa1a0c3a76318c058682cb6be9dc231754 # v0.2.1
+      - uses: amezin/container-registry-prune-action@3239b63db893af748b6cf2f35ce4ffdedb09a42e # v0.3.1
         with:
           name: ${{ github.event.repository.name }}/${{ matrix.image }}
           tag-patterns: |
