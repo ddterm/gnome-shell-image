@@ -36,3 +36,6 @@ for pkg in "${locked_packages[@]}"
 do
     test "${pkg}" = "$(dpkg-query --showformat='${Package}=${Version}' --show "${pkg%=*}")"
 done
+
+apt-get clean
+apt-get distclean
