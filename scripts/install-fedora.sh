@@ -5,11 +5,11 @@ set -ex
 source /etc/os-release
 
 locked_packages=(
-    "gnome-shell-$GNOME_SHELL_VERSION"
-    "mutter-$MUTTER_VERSION"
-    "gjs-$GJS_VERSION"
-    "vte291-$VTE_VERSION"
-    "vte291-gtk4-$VTE_VERSION"
+    "gnome-shell${GNOME_SHELL_VERSION:+-$GNOME_SHELL_VERSION}"
+    "mutter${MUTTER_VERSION:+-$MUTTER_VERSION}"
+    "gjs${GJS_VERSION:+-$GJS_VERSION}"
+    "vte291${VTE_VERSION:+-$VTE_VERSION}"
+    "vte291-gtk4${VTE_VERSION:+-$VTE_VERSION}"
 )
 
 packages=(
