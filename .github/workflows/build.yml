@@ -41,6 +41,8 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
+
       - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
         with:
           registry: ghcr.io
@@ -59,6 +61,7 @@ jobs:
           file: ${{ matrix.name }}.dockerfile
           pull: true
           push: ${{ inputs.push }}
+          outputs: type=oci,dest=${{ runner.temp }}/image.tar
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           annotations: ${{ steps.docker_meta.outputs.annotations }}
@@ -68,17 +71,13 @@ jobs:
           cache-to: type=inline
 
       - id: podman_pull
-        run: |
-          imageid="$(podman pull "docker-daemon:$IMAGE_ID")"
-          echo "imageid=$imageid" | tee "$GITHUB_OUTPUT"
-        env:
-          IMAGE_ID: ${{ steps.docker_build.outputs.imageid }}
+        run: podman load -i "$RUNNER_TEMP/image.tar"
 
       - id: gnome-session-wayland
         name: Test gnome-session-wayland
         run: test/test-wayland.sh "$IMAGE_ID"
         env:
-          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
+          IMAGE_ID: ${{ fromJSON(steps.docker_build.outputs.metadata)['image.name'] }}@${{ steps.docker_build.outputs.digest }}
 
       - id: has-x11
         name: Check if X11 is available
@@ -86,14 +85,14 @@ jobs:
           cli_arg="$(podman run --rm "$IMAGE_ID" gnome-shell --help | grep -qF -- '--x11' && podman run --rm "$IMAGE_ID" sh -c 'command -V Xvfb >/dev/null' && echo 1 || echo 0)"
           echo "cli_arg=$cli_arg" | tee "$GITHUB_OUTPUT"
         env:
-          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
+          IMAGE_ID: ${{ fromJSON(steps.docker_build.outputs.metadata)['image.name'] }}@${{ steps.docker_build.outputs.digest }}
 
       - id: gnome-session-x11
         name: Test gnome-session-x11
         run: test/test-x11.sh "$IMAGE_ID"
         if: fromJSON(steps.has-x11.outputs.cli_arg)
         env:
-          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
+          IMAGE_ID: ${{ fromJSON(steps.docker_build.outputs.metadata)['image.name'] }}@${{ steps.docker_build.outputs.digest }}
 
       - name: Upload screenshot
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
