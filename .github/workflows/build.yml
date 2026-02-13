@@ -61,7 +61,7 @@ jobs:
           file: ${{ matrix.name }}.dockerfile
           pull: true
           push: ${{ inputs.push }}
-          outputs: type=oci,dest=${{ runner.temp }}/image.tar
+          outputs: type=docker,dest=${{ runner.temp }}/image.tar
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           annotations: ${{ steps.docker_meta.outputs.annotations }}
@@ -71,13 +71,15 @@ jobs:
           cache-to: type=inline
 
       - id: podman_pull
-        run: podman load -i "$RUNNER_TEMP/image.tar"
+        run: |
+          imageid="$(podman pull "docker-archive:$RUNNER_TEMP/image.tar")"
+          echo "imageid=$imageid" | head -n1 | tee "$GITHUB_OUTPUT"
 
       - id: gnome-session-wayland
         name: Test gnome-session-wayland
         run: test/test-wayland.sh "$IMAGE_ID"
         env:
-          IMAGE_ID: ${{ fromJSON(steps.docker_build.outputs.metadata)['image.name'] }}@${{ steps.docker_build.outputs.digest }}
+          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
 
       - id: has-x11
         name: Check if X11 is available
@@ -85,14 +87,14 @@ jobs:
           cli_arg="$(podman run --rm "$IMAGE_ID" gnome-shell --help | grep -qF -- '--x11' && podman run --rm "$IMAGE_ID" sh -c 'command -V Xvfb >/dev/null' && echo 1 || echo 0)"
           echo "cli_arg=$cli_arg" | tee "$GITHUB_OUTPUT"
         env:
-          IMAGE_ID: ${{ fromJSON(steps.docker_build.outputs.metadata)['image.name'] }}@${{ steps.docker_build.outputs.digest }}
+          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
 
       - id: gnome-session-x11
         name: Test gnome-session-x11
         run: test/test-x11.sh "$IMAGE_ID"
         if: fromJSON(steps.has-x11.outputs.cli_arg)
         env:
-          IMAGE_ID: ${{ fromJSON(steps.docker_build.outputs.metadata)['image.name'] }}@${{ steps.docker_build.outputs.digest }}
+          IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
 
       - name: Upload screenshot
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
