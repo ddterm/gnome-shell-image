@@ -12,7 +12,6 @@ locked_packages=(
 
 packages=(
     "${locked_packages[@]}"
-    dbus-daemon-units
     xorg-server-xvfb
     xorg-xinit
     mesa
@@ -21,7 +20,6 @@ packages=(
     libhandy
 )
 
-pacman -Rdd --noconfirm dbus-broker-units
 pacman -Syu --noconfirm "${packages[@]}"
 
 for pkg in "${locked_packages[@]}"
