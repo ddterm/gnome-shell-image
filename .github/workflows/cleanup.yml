@@ -64,7 +64,7 @@ jobs:
           - image: fedora-41
 
     steps:
-      - uses: amezin/container-registry-prune-action@6a72f9bdaeb035d1c6e9ac78eb24ada02aa71e55 # v0.3.2
+      - uses: amezin/container-registry-prune-action@745c28c7cae1de00356a7d065fab6e3fda67926d # v0.3.3
         with:
           name: ${{ github.event.repository.name }}/${{ matrix.image }}
           tag-patterns: |
