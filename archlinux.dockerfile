@@ -7,7 +7,7 @@ ARG GNOME_SHELL_VERSION=1:49.4-2
 ARG MUTTER_VERSION=49.4-1
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='arch']
-ARG GJS_VERSION=2:1.86.0-1
+ARG GJS_VERSION=2:1.86.0-2
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='arch']
 ARG VTE_VERSION=0.82.3-1
