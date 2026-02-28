@@ -35,6 +35,7 @@
         "alpine-*.dockerfile",
         "archlinux.dockerfile",
         "fedora-*.dockerfile",
+        "centos-*.dockerfile",
         "opensuse-*.dockerfile"
       ],
       "versioning": "rpm"
