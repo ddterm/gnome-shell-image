@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=49.4-3.el10
 ARG GJS_VERSION=1.80.2-11.el10
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='centos_stream_10']
-ARG VTE_VERSION=0.78.4-1.el10
+ARG VTE_VERSION=0.78.6-1.el10
 
 COPY scripts/install-fedora.sh /usr/local/bin/
 RUN env \
