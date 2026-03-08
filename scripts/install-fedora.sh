@@ -28,6 +28,8 @@ if [ "$ID" = fedora ]; then
     if (( VERSION_ID < 43 )); then
         packages+=(gnome-session-xsession)
     fi
+
+    dnf config-manager setopt updates-testing.enabled=false
 fi
 
 if [ "$ID" = centos ]; then
