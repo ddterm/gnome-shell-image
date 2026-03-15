@@ -1,7 +1,7 @@
 FROM docker.io/library/debian:trixie
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='debian_13']
-ARG GNOME_SHELL_VERSION=48.7-0+deb13u1
+ARG GNOME_SHELL_VERSION=48.7-0+deb13u2
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='debian_13']
 ARG MUTTER_VERSION=48.7-0+deb13u1
