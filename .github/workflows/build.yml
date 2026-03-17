@@ -37,6 +37,7 @@ jobs:
     timeout-minutes: 15
     env:
       IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.name }}
+      IMAGE_NAME: ${{ matrix.name }}
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -82,6 +83,16 @@ jobs:
         env:
           IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
 
+      - run: mv test/screenshot-wayland.png "test/$IMAGE_NAME-wayland.png"
+        if: ${{ !cancelled() && steps.gnome-session-wayland.outcome != 'skipped' }}
+
+      - name: Upload screenshot
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          path: test/${{ env.IMAGE_NAME }}-wayland.png
+          archive: false
+        if: ${{ !cancelled() && steps.gnome-session-wayland.outcome != 'skipped' }}
+
       - id: has-x11
         name: Check if X11 is available
         run: |
@@ -89,17 +100,21 @@ jobs:
           echo "cli_arg=$cli_arg" | tee "$GITHUB_OUTPUT"
         env:
           IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
+        if: ${{ !cancelled() && steps.podman_pull.outcome == 'success' }}
 
       - id: gnome-session-x11
         name: Test gnome-session-x11
         run: test/test-x11.sh "$IMAGE_ID"
-        if: fromJSON(steps.has-x11.outputs.cli_arg)
+        if: ${{ !cancelled() && steps.has-x11.outcome == 'success' && fromJSON(steps.has-x11.outputs.cli_arg) }}
         env:
           IMAGE_ID: ${{ steps.podman_pull.outputs.imageid }}
+
+      - run: mv test/screenshot-x11.png "test/$IMAGE_NAME-x11.png"
+        if: ${{ !cancelled() && steps.gnome-session-x11.outcome != 'skipped' }}
 
       - name: Upload screenshot
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
-          name: ${{ matrix.name }}-screenshots
-          path: test/*.png
-        if: always() && steps.podman_pull.outcome == 'success'
+          path: test/${{ env.IMAGE_NAME }}-x11.png
+          archive: false
+        if: ${{ !cancelled() && steps.gnome-session-x11.outcome != 'skipped' }}
