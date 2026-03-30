@@ -1,7 +1,7 @@
 FROM quay.io/centos/centos:10
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='centos_stream_10']
-ARG GNOME_SHELL_VERSION=49.4-2.el10
+ARG GNOME_SHELL_VERSION=49.5-1.el10
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='centos_stream_10']
 ARG MUTTER_VERSION=49.4-4.el10
