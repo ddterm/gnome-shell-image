@@ -1,16 +1,16 @@
 FROM ghcr.io/archlinux/archlinux:base
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='arch']
-ARG GNOME_SHELL_VERSION=1:49.5-1
+ARG GNOME_SHELL_VERSION=1:50.0-1
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='arch']
-ARG MUTTER_VERSION=49.5-1
+ARG MUTTER_VERSION=50.0-1
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='arch']
-ARG GJS_VERSION=2:1.86.0-2
+ARG GJS_VERSION=2:1.88.0-1
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='arch']
-ARG VTE_VERSION=0.82.3-1
+ARG VTE_VERSION=0.84.0-1
 
 COPY scripts/install-archlinux.sh /usr/local/bin/
 RUN env \
