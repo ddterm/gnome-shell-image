@@ -1,10 +1,10 @@
 FROM docker.io/library/ubuntu:26.04
 
 # renovate: datasource=deb depName=gnome-shell
-ARG GNOME_SHELL_VERSION=50.0-1ubuntu3
+ARG GNOME_SHELL_VERSION=50.1-0ubuntu1
 
 # renovate: datasource=deb depName=mutter
-ARG MUTTER_VERSION=50.0-0ubuntu6
+ARG MUTTER_VERSION=50.1-0ubuntu2
 
 # renovate: datasource=deb depName=gjs
 ARG GJS_VERSION=1.88.0-1
