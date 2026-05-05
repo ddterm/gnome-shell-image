@@ -15,7 +15,7 @@ locked_packages=(
 packages=(
     "${locked_packages[@]}"
     /usr/bin/dbus-daemon
-    systemd-sysvinit
+    systemd
     xorg-x11-server-Xvfb
     gdm
     gnome-session-wayland
