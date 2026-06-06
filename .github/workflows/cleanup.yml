@@ -62,6 +62,9 @@ jobs:
           - image: alpine-3.19
           - image: ubuntu-25.04
           - image: fedora-41
+          - image: fedora-42
+          - image: opensuse-leap-15.6
+          - image: alpine-3.20
 
     steps:
       - uses: amezin/container-registry-prune-action@09530d716f58d3f614e9ba54517e729e1b8117c0 # v0.4.2
