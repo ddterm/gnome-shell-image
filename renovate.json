@@ -32,6 +32,7 @@
         "custom.repology"
       ],
       "matchFileNames": [
+        "almalinux-*.dockerfile",
         "alpine-*.dockerfile",
         "archlinux.dockerfile",
         "fedora-*.dockerfile",
@@ -49,6 +50,23 @@
         "ubuntu-*.dockerfile"
       ],
       "versioning": "deb"
+    },
+    {
+      "matchDatasources": [
+        "rpm"
+      ],
+      "versioning": "rpm"
+    },
+    {
+      "matchDatasources": [
+        "rpm"
+      ],
+      "matchFileNames": [
+        "almalinux-10.dockerfile"
+      ],
+      "registryUrls": [
+        "https://repo.almalinux.org/almalinux/10/AppStream/x86_64/os/repodata/"
+      ]
     },
     {
       "matchDatasources": [

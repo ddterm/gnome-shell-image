@@ -32,7 +32,8 @@ if [ "$ID" = fedora ]; then
     dnf config-manager setopt updates-testing.enabled=false
 fi
 
-if [ "$ID" = centos ]; then
+if [ "$ID" = centos ] || [ "$ID" = almalinux ]; then
+    dnf install -y 'dnf-command(config-manager)'
     dnf config-manager --set-enabled crb
     dnf install -y epel-release
 fi
