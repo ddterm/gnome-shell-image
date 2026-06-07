@@ -22,11 +22,9 @@ packages=(
     libhandy
 )
 
-if [ "$ID" = fedora ] || [ "$ID" = almalinux ]; then
-    packages+=(xorg-x11-server-Xvfb)
-fi
-
 if [ "$ID" = fedora ]; then
+    packages+=(xorg-x11-server-Xvfb)
+
     if (( VERSION_ID < 43 )); then
         packages+=(gnome-session-xsession)
     fi
@@ -35,14 +33,9 @@ if [ "$ID" = fedora ]; then
 fi
 
 if [ "$ID" = centos ] || [ "$ID" = almalinux ]; then
-    pre_packages=('dnf-command(config-manager)' epel-release)
-
-    if [ "$ID" = almalinux ]; then
-        pre_packages+=(almalinux-release-devel)
-    fi
-
-    dnf install -y "${pre_packages[@]}"
+    dnf install -y 'dnf-command(config-manager)'
     dnf config-manager --set-enabled crb
+    dnf install -y epel-release
 fi
 
 dnf install -y --nodocs --setopt install_weak_deps=False "${packages[@]}"
