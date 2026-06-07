@@ -2,6 +2,13 @@
 
 set -ex
 
+. /etc/os-release
+
+if [ "$PRETTY_NAME" = "Alpine Linux edge" ]
+then
+    apk upgrade
+fi
+
 locked_packages="
     gnome-shell=$GNOME_SHELL_VERSION
     mutter=$MUTTER_VERSION
