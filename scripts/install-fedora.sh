@@ -23,12 +23,6 @@ packages=(
 )
 
 if [ "$ID" = fedora ]; then
-    packages+=(xorg-x11-server-Xvfb)
-
-    if (( VERSION_ID < 43 )); then
-        packages+=(gnome-session-xsession)
-    fi
-
     dnf config-manager setopt updates-testing.enabled=false
 fi
 
