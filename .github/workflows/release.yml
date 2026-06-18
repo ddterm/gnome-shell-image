@@ -49,7 +49,7 @@ jobs:
           echo "latest=$LATEST" | tee "$GITHUB_OUTPUT"
 
       - id: should-release
-        uses: amezin/detect-changes-action@a8eff3b8f97f517b49e85ec8bef76dceecda748b # v2.2.2
+        uses: amezin/detect-changes-action@068c17f2b4774bc7b15b5e92b00159936d861f4c # v2.2.3
         with:
           files: |
             # Don't autorelease on CI changes. If necessary, a release can be created manually
