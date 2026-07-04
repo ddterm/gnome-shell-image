@@ -4,7 +4,7 @@ FROM ghcr.io/archlinux/archlinux:base
 ARG GNOME_SHELL_VERSION=1:50.3-1
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='arch']
-ARG MUTTER_VERSION=50.2-2
+ARG MUTTER_VERSION=50.3-1
 
 # renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='arch']
 ARG GJS_VERSION=2:1.88.1-1
