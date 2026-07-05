@@ -85,30 +85,6 @@
         "deb"
       ],
       "matchFileNames": [
-        "ubuntu-25.04.dockerfile"
-      ],
-      "registryUrls": [
-        "http://ftp.ubuntu.com/ubuntu?release=plucky&components=main,universe&binaryArch=amd64",
-        "http://ftp.ubuntu.com/ubuntu?release=plucky-updates&components=main,universe&binaryArch=amd64"
-      ]
-    },
-    {
-      "matchDatasources": [
-        "deb"
-      ],
-      "matchFileNames": [
-        "ubuntu-25.10.dockerfile"
-      ],
-      "registryUrls": [
-        "http://ftp.ubuntu.com/ubuntu?release=questing&components=main,universe&binaryArch=amd64",
-        "http://ftp.ubuntu.com/ubuntu?release=questing-updates&components=main,universe&binaryArch=amd64"
-      ]
-    },
-    {
-      "matchDatasources": [
-        "deb"
-      ],
-      "matchFileNames": [
         "ubuntu-26.04.dockerfile"
       ],
       "registryUrls": [
