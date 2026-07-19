@@ -4,7 +4,7 @@ FROM ghcr.io/almalinux/10-init:latest
 ARG GNOME_SHELL_VERSION=49.4-3.el10_2.alma.1
 
 # renovate: datasource=rpm depName=mutter
-ARG MUTTER_VERSION=49.4-3.el10
+ARG MUTTER_VERSION=49.4-4.el10_2
 
 # renovate: datasource=rpm depName=gjs
 ARG GJS_VERSION=1.80.2-11.el10
