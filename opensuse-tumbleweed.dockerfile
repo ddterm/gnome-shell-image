@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=50.4-1.1
 ARG GJS_VERSION=1.88.1-2.1
 
 # renovate: datasource=custom.repology depName=vte packageName=vte[repo='opensuse_tumbleweed']
-ARG VTE_VERSION=0.84.1-1.1
+ARG VTE_VERSION=0.84.1-1.2
 
 COPY scripts/install-suse.sh /usr/local/bin/
 RUN env \
