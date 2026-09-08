@@ -3,8 +3,7 @@
   "extends": [
     "config:recommended",
     ":maintainLockFilesWeekly",
-    "security:minimumReleaseAgeNpm",
-    "customManagers:dockerfileVersions"
+    "security:minimumReleaseAgeNpm"
   ],
   "customDatasources": {
     "repology": {
@@ -13,8 +12,26 @@
         "${{{ replace '^[^\\[]*' '' packageName }}}[]",
         "{ 'releases': $.{ 'version': origversion }[] }"
       ]
+    },
+    "github-release-assets": {
+      "transformTemplates": [
+        "{'releases':$[draft=false].{'version':$replace(tag_name,/^v/,''),'isStable':$not(prerelease),'digest':assets[$contains(name,{{{packageName}}})][0].digest.($?$replace(/^sha256:/,''):undefined),'releaseTimestamp':published_at}}"
+      ]
     }
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "*.dockerfile",
+        ".github/workflows/code-scan.yml"
+      ],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+(lookupName|packageName)=(?<packageName>\\S+))?(\\s+versioning=(?<versioning>\\S+))?(\\s+extractVersion=(?<extractVersion>\\S+))?(\\s+registryUrl=(?<registryUrl>\\S+))?\\n[^\\n:=]*[:=]\\s*[\"']?(?<currentValue>[^\\s\"']+)[\"']?(\\s|$)",
+        "#\\s*renovate-digest:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)\\s+currentValue=(?<currentValue>\\S+)(\\s+(lookupName|packageName)=(?<packageName>\\S+))?(\\s+versioning=(?<versioning>\\S+))?(\\s+extractVersion=(?<extractVersion>\\S+))?(\\s+registryUrl=(?<registryUrl>\\S+))?\\n[^\\n:=]*[:=]\\s*[\"']?(?<currentDigest>[^\\s\"']+)[\"']?(\\s|$)"
+      ]
+    }
+  ],
   "packageRules": [
     {
       "matchFileNames": [
