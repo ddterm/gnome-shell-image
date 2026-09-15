@@ -115,6 +115,13 @@
         ":pinVersions"
       ],
       "versioning": "npm"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchDepTypes": ["action", "workflow"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true,
+      "minimumReleaseAge": "3 days"
     }
   ],
   "hostRules": [
