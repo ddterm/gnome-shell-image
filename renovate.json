@@ -12,6 +12,12 @@
         "{'releases':$.results[].{'version':(epoch?epoch&':':'')&pkgver&'-'&pkgrel,'releaseTimestamp':build_date}}"
       ]
     },
+    "bodhi": {
+      "defaultRegistryUrlTemplate": "https://bodhi.fedoraproject.org/updates/?packages={{{ packageName }}}",
+      "transformTemplates": [
+        "{'releases':$.updates[].builds[].{'version':nvr,'releaseTimestamp':%.date_pushed?$replace(%.date_pushed,' ','T')&'Z','isStable':%.status='stable'}}"
+      ]
+    },
     "repology": {
       "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{ encodeURIComponent (replace '\\[.*\\]$' '' packageName) }}}",
       "transformTemplates": [
@@ -74,7 +80,8 @@
     {
       "matchDatasources": [
         "rpm",
-        "custom.archlinux"
+        "custom.archlinux",
+        "custom.bodhi"
       ],
       "versioning": "rpm"
     },
@@ -173,6 +180,10 @@
     },
     {
       "matchHost": "archlinux.org",
+      "concurrentRequestLimit": 1
+    },
+    {
+      "matchHost": "bodhi.fedoraproject.org",
       "concurrentRequestLimit": 1
     }
   ],
