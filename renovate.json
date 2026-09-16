@@ -6,6 +6,12 @@
     "security:minimumReleaseAgeNpm"
   ],
   "customDatasources": {
+    "archlinux": {
+      "defaultRegistryUrlTemplate": "https://archlinux.org/packages/search/json/?name={{{ packageName }}}",
+      "transformTemplates": [
+        "{'releases':$.results[].{'version':(epoch?epoch&':':'')&pkgver&'-'&pkgrel,'releaseTimestamp':build_date}}"
+      ]
+    },
     "repology": {
       "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{ encodeURIComponent (replace '\\[.*\\]$' '' packageName) }}}",
       "transformTemplates": [
@@ -51,7 +57,6 @@
       "matchFileNames": [
         "almalinux-*.dockerfile",
         "alpine-*.dockerfile",
-        "archlinux.dockerfile",
         "fedora-*.dockerfile",
         "centos-*.dockerfile",
         "opensuse-*.dockerfile"
@@ -70,7 +75,8 @@
     },
     {
       "matchDatasources": [
-        "rpm"
+        "rpm",
+        "custom.archlinux"
       ],
       "versioning": "rpm"
     },
@@ -133,6 +139,10 @@
       "keepAlive": true,
       "enableHttp2": true,
       "timeout": 300000
+    },
+    {
+      "matchHost": "archlinux.org",
+      "concurrentRequestLimit": 1
     }
   ],
   "dockerfile": {
