@@ -56,7 +56,6 @@
       ],
       "matchFileNames": [
         "almalinux-*.dockerfile",
-        "alpine-*.dockerfile",
         "fedora-*.dockerfile",
         "centos-*.dockerfile",
         "opensuse-*.dockerfile"
@@ -113,6 +112,28 @@
       "registryUrls": [
         "http://ftp.ubuntu.com/ubuntu?release=resolute&components=main,universe&binaryArch=amd64",
         "http://ftp.ubuntu.com/ubuntu?release=resolute-updates&components=main,universe&binaryArch=amd64"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "apk"
+      ],
+      "matchFileNames": [
+        "alpine-3.24.dockerfile"
+      ],
+      "registryUrls": [
+        "https://dl-cdn.alpinelinux.org/alpine?branch=v3.24&components=community&arch=x86_64"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "apk"
+      ],
+      "matchFileNames": [
+        "alpine-edge.dockerfile"
+      ],
+      "registryUrls": [
+        "https://dl-cdn.alpinelinux.org/alpine?branch=edge&components=community&arch=x86_64"
       ]
     },
     {
