@@ -57,7 +57,6 @@
       "matchFileNames": [
         "almalinux-*.dockerfile",
         "fedora-*.dockerfile",
-        "centos-*.dockerfile",
         "opensuse-*.dockerfile"
       ],
       "versioning": "rpm"
@@ -88,6 +87,17 @@
       ],
       "registryUrls": [
         "https://repo.almalinux.org/almalinux/10/AppStream/x86_64/os/repodata/"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "rpm"
+      ],
+      "matchFileNames": [
+        "centos-10.dockerfile"
+      ],
+      "registryUrls": [
+        "https://mirror.stream.centos.org/10-stream/AppStream/x86_64/os/repodata/"
       ]
     },
     {

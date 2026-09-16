@@ -1,15 +1,15 @@
 FROM quay.io/centos/centos:10
 
-# renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='centos_stream_10']
+# renovate: datasource=rpm depName=gnome-shell
 ARG GNOME_SHELL_VERSION=49.5-13.el10
 
-# renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='centos_stream_10']
+# renovate: datasource=rpm depName=mutter
 ARG MUTTER_VERSION=49.4-6.el10
 
-# renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='centos_stream_10']
+# renovate: datasource=rpm depName=gjs
 ARG GJS_VERSION=1.80.2-11.el10
 
-# renovate: datasource=custom.repology depName=vte packageName=vte[repo='centos_stream_10']
+# renovate: datasource=rpm depName=vte packageName=vte291
 ARG VTE_VERSION=0.78.6-1.el10
 
 COPY scripts/install-fedora.sh /usr/local/bin/
