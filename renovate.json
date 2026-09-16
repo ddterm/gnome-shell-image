@@ -18,13 +18,6 @@
         "{'releases':$.updates[].builds[].{'version':nvr,'releaseTimestamp':%.date_pushed?$replace(%.date_pushed,' ','T')&'Z','isStable':%.status='stable'}}"
       ]
     },
-    "repology": {
-      "defaultRegistryUrlTemplate": "https://repology.org/api/v1/project/{{{ encodeURIComponent (replace '\\[.*\\]$' '' packageName) }}}",
-      "transformTemplates": [
-        "${{{ replace '^[^\\[]*' '' packageName }}}[]",
-        "{ 'releases': $.{ 'version': origversion }[] }"
-      ]
-    },
     "github-release-assets": {
       "transformTemplates": [
         "{'releases':$[draft=false].{'version':$replace(tag_name,/^v/,''),'isStable':$not(prerelease),'digest':assets[$contains(name,{{{packageName}}})][0].digest.($?$replace(/^sha256:/,''):undefined),'releaseTimestamp':published_at}}"
@@ -55,27 +48,6 @@
         ":automergeAll",
         "schedule:automergeDaily"
       ]
-    },
-    {
-      "matchDatasources": [
-        "custom.repology"
-      ],
-      "matchFileNames": [
-        "almalinux-*.dockerfile",
-        "fedora-*.dockerfile",
-        "opensuse-*.dockerfile"
-      ],
-      "versioning": "rpm"
-    },
-    {
-      "matchDatasources": [
-        "custom.repology"
-      ],
-      "matchFileNames": [
-        "debian-*.dockerfile",
-        "ubuntu-*.dockerfile"
-      ],
-      "versioning": "deb"
     },
     {
       "matchDatasources": [
@@ -169,15 +141,6 @@
     }
   ],
   "hostRules": [
-    {
-      "matchHost": "repology.org",
-      "concurrentRequestLimit": 1,
-      "maxRequestsPerSecond": 0.1,
-      "abortOnError": true,
-      "keepAlive": true,
-      "enableHttp2": true,
-      "timeout": 300000
-    },
     {
       "matchHost": "archlinux.org",
       "concurrentRequestLimit": 1

@@ -1,24 +1,7 @@
 FROM docker.io/library/debian:trixie
 
-# renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='debian_13']
-ARG GNOME_SHELL_VERSION=48.7-0+deb13u2
-
-# renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='debian_13']
-ARG MUTTER_VERSION=48.7-0+deb13u1
-
-# renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='debian_13']
-ARG GJS_VERSION=1.82.3-1
-
-# renovate: datasource=custom.repology depName=vte packageName=vte[repo='debian_13'][srcname='vte2.91']
-ARG VTE_VERSION=0.80.1-1
-
 COPY scripts/install-debian.sh /usr/local/bin/
-RUN env \
-    "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
-    "MUTTER_VERSION=$MUTTER_VERSION" \
-    "GJS_VERSION=$GJS_VERSION" \
-    "VTE_VERSION=$VTE_VERSION" \
-    /usr/local/bin/install-debian.sh
+RUN /usr/local/bin/install-debian.sh
 
 COPY data /
 

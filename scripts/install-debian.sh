@@ -5,11 +5,11 @@ set -ex
 source /etc/os-release
 
 locked_packages=(
-    "gnome-shell=$GNOME_SHELL_VERSION"
-    "mutter=$MUTTER_VERSION"
-    "gjs=$GJS_VERSION"
-    "gir1.2-vte-2.91=$VTE_VERSION"
-    "gir1.2-vte-3.91=$VTE_VERSION"
+    "gnome-shell${GNOME_SHELL_VERSION:+=$GNOME_SHELL_VERSION}"
+    "mutter${MUTTER_VERSION:+=$MUTTER_VERSION}"
+    "gjs${GJS_VERSION:+=$GJS_VERSION}"
+    "gir1.2-vte-2.91${VTE_VERSION:+=$VTE_VERSION}"
+    "gir1.2-vte-3.91${VTE_VERSION:+=$VTE_VERSION}"
 )
 
 packages=(
@@ -34,7 +34,10 @@ apt-get install -y --no-install-recommends "${packages[@]}"
 
 for pkg in "${locked_packages[@]}"
 do
-    test "${pkg}" = "$(dpkg-query --showformat='${Package}=${Version}' --show "${pkg%=*}")"
+    if [[ "$pkg" == *=* ]]
+    then
+        test "${pkg}" = "$(dpkg-query --showformat='${Package}=${Version}' --show "${pkg%=*}")"
+    fi
 done
 
 apt-get clean

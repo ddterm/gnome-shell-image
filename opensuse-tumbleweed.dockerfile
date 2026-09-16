@@ -1,24 +1,7 @@
 FROM docker.io/opensuse/tumbleweed:latest
 
-# renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='opensuse_tumbleweed']
-ARG GNOME_SHELL_VERSION=50.4-1.1
-
-# renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='opensuse_tumbleweed']
-ARG MUTTER_VERSION=50.4-1.1
-
-# renovate: datasource=custom.repology depName=gjs packageName=gjs[repo='opensuse_tumbleweed']
-ARG GJS_VERSION=1.88.1-2.1
-
-# renovate: datasource=custom.repology depName=vte packageName=vte[repo='opensuse_tumbleweed']
-ARG VTE_VERSION=0.84.1-1.2
-
 COPY scripts/install-suse.sh /usr/local/bin/
-RUN env \
-    "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
-    "MUTTER_VERSION=$MUTTER_VERSION" \
-    "GJS_VERSION=$GJS_VERSION" \
-    "VTE_VERSION=$VTE_VERSION" \
-    /usr/local/bin/install-suse.sh
+RUN /usr/local/bin/install-suse.sh
 
 COPY data /
 
