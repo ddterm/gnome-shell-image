@@ -1,7 +1,7 @@
 FROM quay.io/centos/centos:10
 
 # renovate: datasource=rpm depName=gnome-shell
-ARG GNOME_SHELL_VERSION=49.5-13.el10
+ARG GNOME_SHELL_VERSION=49.5-14.el10
 
 # renovate: datasource=rpm depName=mutter
 ARG MUTTER_VERSION=49.4-6.el10
