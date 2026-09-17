@@ -22,6 +22,12 @@
       "transformTemplates": [
         "{'releases':$[draft=false].{'version':$replace(tag_name,/^v/,''),'isStable':$not(prerelease),'digest':assets[$contains(name,{{{packageName}}})][0].digest.($?$replace(/^sha256:/,''):undefined),'releaseTimestamp':published_at}}"
       ]
+    },
+    "opensuse-downloads": {
+      "defaultRegistryUrlTemplate": "https://download.opensuse.org/{{{ packageName }}}/?jsontable",
+      "transformTemplates": [
+        "{'releases':[data[].{'version':name}]}"
+      ]
     }
   },
   "customManagers": [
