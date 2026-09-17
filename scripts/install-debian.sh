@@ -15,6 +15,7 @@ locked_packages=(
 packages=(
     "${locked_packages[@]}"
     gnome-session
+    dbus-daemon
     dbus-user-session
     gdm3
     xvfb
