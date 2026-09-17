@@ -4,7 +4,7 @@ FROM quay.io/fedora/fedora:44
 ARG GNOME_SHELL_VERSION=50.4-1.fc44
 
 # renovate: datasource=custom.bodhi depName=mutter packageName=mutter&status=stable&releases=F44 extractVersion=^mutter-(?<version>\d.*)$
-ARG MUTTER_VERSION=50.4-1.fc44
+ARG MUTTER_VERSION=50.5-1.fc44
 
 # renovate: datasource=custom.bodhi depName=gjs packageName=gjs&status=stable&releases=F44 extractVersion=^gjs-(?<version>\d.*)$
 ARG GJS_VERSION=1.88.1-2.fc44
