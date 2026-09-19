@@ -4,7 +4,7 @@ FROM docker.io/library/ubuntu:26.04
 ARG GNOME_SHELL_VERSION=50.1-0ubuntu1.2
 
 # renovate: datasource=deb depName=mutter
-ARG MUTTER_VERSION=50.1-0ubuntu2.2
+ARG MUTTER_VERSION=50.1-0ubuntu2.4
 
 # renovate: datasource=deb depName=gjs
 ARG GJS_VERSION=1.88.0-1

@@ -1,13 +1,13 @@
 FROM docker.io/library/alpine:edge
 
 # renovate: datasource=apk depName=gnome-shell
-ARG GNOME_SHELL_VERSION=50.4-r0
+ARG GNOME_SHELL_VERSION=51.0-r0
 
 # renovate: datasource=apk depName=mutter
-ARG MUTTER_VERSION=50.4-r0
+ARG MUTTER_VERSION=51.0-r0
 
 # renovate: datasource=apk depName=gjs
-ARG GJS_VERSION=1.88.1-r0
+ARG GJS_VERSION=1.90.0-r0
 
 # renovate: datasource=apk depName=vte packageName=vte3
 ARG VTE_VERSION=0.84.1-r1
