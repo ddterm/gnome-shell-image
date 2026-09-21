@@ -8,14 +8,14 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
+    uses: $/.github/workflows/build.yml
     permissions:
       contents: read
       packages: write
 
   release:
     needs: build
-    uses: ./.github/workflows/release.yml
+    uses: $/.github/workflows/release.yml
     permissions:
       contents: write
       actions: write

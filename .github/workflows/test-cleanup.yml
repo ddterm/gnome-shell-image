@@ -16,7 +16,7 @@ jobs:
   cleanup:
     if: >-
       !github.event.pull_request || github.event.pull_request.base.repo.node_id != github.event.pull_request.head.repo.node_id
-    uses: ./.github/workflows/cleanup.yml
+    uses: $/.github/workflows/cleanup.yml
     with:
       dry-run: true
     permissions:
