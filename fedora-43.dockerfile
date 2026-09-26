@@ -1,7 +1,7 @@
 FROM quay.io/fedora/fedora:43
 
 # renovate: datasource=custom.bodhi depName=gnome-shell packageName=gnome-shell&status=stable&releases=F43 extractVersion=^gnome-shell-(?<version>\d.*)$
-ARG GNOME_SHELL_VERSION=49.9-1.fc43
+ARG GNOME_SHELL_VERSION=49.10-1.fc43
 
 # renovate: datasource=custom.bodhi depName=mutter packageName=mutter&status=stable&releases=F43 extractVersion=^mutter-(?<version>\d.*)$
 ARG MUTTER_VERSION=49.7-1.fc43
