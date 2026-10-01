@@ -1,13 +1,13 @@
 FROM quay.io/fedora/fedora:45
 
 # renovate: datasource=custom.bodhi depName=gnome-shell packageName=gnome-shell&status=stable&releases=F45 extractVersion=^gnome-shell-(?<version>\d.*)$
-ARG GNOME_SHELL_VERSION=51~rc-2.fc45
+ARG GNOME_SHELL_VERSION=51.0-1.fc45
 
 # renovate: datasource=custom.bodhi depName=mutter packageName=mutter&status=stable&releases=F45 extractVersion=^mutter-(?<version>\d.*)$
-ARG MUTTER_VERSION=51~rc-2.fc45
+ARG MUTTER_VERSION=51.0-1.fc45
 
 # renovate: datasource=custom.bodhi depName=gjs packageName=gjs&status=stable&releases=F45 extractVersion=^gjs-(?<version>\d.*)$
-ARG GJS_VERSION=1.89.90-1.fc45
+ARG GJS_VERSION=1.90.0-1.fc45
 
 # renovate: datasource=custom.bodhi depName=vte packageName=vte291&status=stable&releases=F45 extractVersion=^vte291-(?<version>\d.*)$
 ARG VTE_VERSION=0.84.1-1.fc45
