@@ -54,19 +54,42 @@ jobs:
       fail-fast: false
       matrix:
         image: ${{ fromJSON(needs.setup.outputs.images) }}
+        cache: [true]
         include:
           - image: alpine-3.19
+            cache: false
           - image: ubuntu-25.04
+            cache: false
           - image: fedora-41
+            cache: false
           - image: fedora-42
+            cache: false
           - image: opensuse-leap-15.6
+            cache: false
           - image: alpine-3.20
+            cache: false
           - image: ubuntu-25.10
+            cache: false
           - image: alpine-3.21
+            cache: false
           - image: alpine-3.22
+            cache: false
           - image: alpine-3.23
+            cache: false
 
     steps:
+      - uses: amezin/container-registry-prune-action@4b4965427da5aa037005aa1849921efda619eaa9 # v0.4.5
+        if: fromJSON(matrix.cache)
+        with:
+          name: ${{ github.event.repository.name }}/cache/${{ matrix.image }}
+          tag-patterns: |
+            ${{ github.event.repository.default_branch }}
+            ${{ needs.setup.outputs.keep-tags }}
+          matching-tags-retention-duration: 1m
+          mismatching-tags-retention-duration: 1d
+          untagged-retention-duration: 1d
+          dry-run: ${{ inputs.dry-run }}
+
       - uses: amezin/container-registry-prune-action@4b4965427da5aa037005aa1849921efda619eaa9 # v0.4.5
         with:
           name: ${{ github.event.repository.name }}/${{ matrix.image }}

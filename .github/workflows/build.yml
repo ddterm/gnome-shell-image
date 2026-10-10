@@ -38,8 +38,9 @@ jobs:
 
     timeout-minutes: 15
     env:
-      IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.name }}
       IMAGE_NAME: ${{ matrix.name }}
+      IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.name }}
+      CACHE_IMAGE: ghcr.io/${{ github.repository }}/cache/${{ matrix.name }}
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -72,9 +73,20 @@ jobs:
           annotations: ${{ steps.docker_meta.outputs.annotations }}
           provenance: false
           cache-from: |
-            ${{ steps.docker_meta.outputs.tags }}
+            ${{ env.CACHE_TAG }}
+            type=gha
+            ${{ env.CACHE_IMAGE }}:${{ github.event.repository.default_branch }}
             ${{ env.IMAGE }}:${{ github.event.repository.default_branch }}
-          cache-to: type=inline
+          cache-to: >-
+            ${{
+                case(
+                  inputs.push,
+                  format('type=registry,ref={0},mode=max', env.CACHE_TAG),
+                  'type=gha,mode=max,ignore-error=true'
+                )
+            }}
+        env:
+          CACHE_TAG: ${{ env.CACHE_IMAGE }}:${{ fromJSON(steps.docker_meta.outputs.json).tag-names[0] }}
 
       - id: podman_pull
         run: |
