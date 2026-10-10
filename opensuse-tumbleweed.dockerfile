@@ -4,7 +4,7 @@ FROM docker.io/opensuse/tumbleweed:latest
 ARG GNOME_SHELL_VERSION=50.5-1.1
 
 # renovate: datasource=custom.opensuse-downloads depName=mutter packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^mutter-(?<version>\d.*)\.x86_64\.rpm
-ARG MUTTER_VERSION=50.5-1.1
+ARG MUTTER_VERSION=50.5-2.1
 
 # renovate: datasource=custom.opensuse-downloads depName=gjs packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^gjs-(?<version>\d.*)\.x86_64\.rpm
 ARG GJS_VERSION=1.88.1-2.1
