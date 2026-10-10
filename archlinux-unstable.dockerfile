@@ -18,8 +18,7 @@ RUN sed -i -E 's/^#(\[.*-testing\])$/\1/g' /etc/pacman.conf && \
     cat /etc/pacman.conf >>/etc/pacman.conf.new && \
     mv -f /etc/pacman.conf.new /etc/pacman.conf
 
-COPY scripts/install-archlinux.sh /usr/local/bin/
-RUN env \
+RUN --mount=type=bind,source=scripts/install-archlinux.sh,target=/usr/local/bin/install-archlinux.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
@@ -28,8 +27,8 @@ RUN env \
 
 COPY data /
 
-COPY scripts/configure-systemd.sh /usr/local/bin/
-RUN /usr/local/bin/configure-systemd.sh
+RUN --mount=type=bind,source=scripts/configure-systemd.sh,target=/usr/local/bin/configure-systemd.sh \
+    /usr/local/bin/configure-systemd.sh
 
 ENV XDG_CURRENT_DESKTOP=GNOME
 

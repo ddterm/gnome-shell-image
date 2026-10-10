@@ -12,8 +12,7 @@ ARG GJS_VERSION=1.80.2-1build2
 # renovate: datasource=deb depName=vte packageName=libvte-2.91-0
 ARG VTE_VERSION=0.76.0-1ubuntu0.1
 
-COPY scripts/install-debian.sh /usr/local/bin/
-RUN env \
+RUN --mount=type=bind,source=scripts/install-debian.sh,target=/usr/local/bin/install-debian.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
@@ -22,8 +21,8 @@ RUN env \
 
 COPY data /
 
-COPY scripts/configure-systemd.sh /usr/local/bin/
-RUN /usr/local/bin/configure-systemd.sh
+RUN --mount=type=bind,source=scripts/configure-systemd.sh,target=/usr/local/bin/configure-systemd.sh \
+    /usr/local/bin/configure-systemd.sh
 
 ENV GNOME_SHELL_SESSION_MODE=ubuntu
 ENV XDG_CURRENT_DESKTOP=ubuntu:GNOME

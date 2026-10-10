@@ -12,8 +12,7 @@ ARG GJS_VERSION=1.88.1-2.1
 # renovate: datasource=custom.opensuse-downloads depName=vte packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^typelib-1_0-Vte-2_91-(?<version>\d.*)\.x86_64\.rpm
 ARG VTE_VERSION=0.84.1-1.3
 
-COPY scripts/install-suse.sh /usr/local/bin/
-RUN env \
+RUN --mount=type=bind,source=scripts/install-suse.sh,target=/usr/local/bin/install-suse.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
@@ -22,8 +21,8 @@ RUN env \
 
 COPY data /
 
-COPY scripts/configure-systemd.sh /usr/local/bin/
-RUN /usr/local/bin/configure-systemd.sh
+RUN --mount=type=bind,source=scripts/configure-systemd.sh,target=/usr/local/bin/configure-systemd.sh \
+    /usr/local/bin/configure-systemd.sh
 
 ENV XDG_CURRENT_DESKTOP=GNOME
 

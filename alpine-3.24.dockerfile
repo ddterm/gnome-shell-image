@@ -12,16 +12,15 @@ ARG GJS_VERSION=1.88.1-r0
 # renovate: datasource=apk depName=vte packageName=vte3
 ARG VTE_VERSION=0.84.0-r2
 
-COPY scripts/install-alpine.sh /usr/local/bin/
-RUN env \
+RUN --mount=type=bind,source=scripts/install-alpine.sh,target=/usr/local/bin/install-alpine.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
     "VTE_VERSION=$VTE_VERSION" \
     /usr/local/bin/install-alpine.sh
 
-COPY scripts/configure-openrc.sh /usr/local/bin/
-RUN /usr/local/bin/configure-openrc.sh
+RUN --mount=type=bind,source=scripts/configure-openrc.sh,target=/usr/local/bin/configure-openrc.sh \
+    /usr/local/bin/configure-openrc.sh
 
 ENV XDG_CURRENT_DESKTOP=GNOME
 

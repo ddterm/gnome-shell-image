@@ -12,8 +12,7 @@ ARG GJS_VERSION=2:1.90.0-1
 # renovate: datasource=custom.archlinux depName=vte packageName=vte3&repo=Extra
 ARG VTE_VERSION=0.84.1-1
 
-COPY scripts/install-archlinux.sh /usr/local/bin/
-RUN env \
+RUN --mount=type=bind,source=scripts/install-archlinux.sh,target=/usr/local/bin/install-archlinux.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
@@ -22,8 +21,8 @@ RUN env \
 
 COPY data /
 
-COPY scripts/configure-systemd.sh /usr/local/bin/
-RUN /usr/local/bin/configure-systemd.sh
+RUN --mount=type=bind,source=scripts/configure-systemd.sh,target=/usr/local/bin/configure-systemd.sh \
+    /usr/local/bin/configure-systemd.sh
 
 ENV XDG_CURRENT_DESKTOP=GNOME
 

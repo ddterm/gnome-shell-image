@@ -12,8 +12,7 @@ ARG GJS_VERSION=1.88.1-2.fc44
 # renovate: datasource=custom.bodhi depName=vte packageName=vte291&status=stable&releases=F44 extractVersion=^vte291-(?<version>\d.*)$
 ARG VTE_VERSION=0.84.1-1.fc44
 
-COPY scripts/install-fedora.sh /usr/local/bin/
-RUN env \
+RUN --mount=type=bind,source=scripts/install-fedora.sh,target=/usr/local/bin/install-fedora.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
     "GJS_VERSION=$GJS_VERSION" \
@@ -22,8 +21,8 @@ RUN env \
 
 COPY data /
 
-COPY scripts/configure-systemd.sh /usr/local/bin/
-RUN /usr/local/bin/configure-systemd.sh
+RUN --mount=type=bind,source=scripts/configure-systemd.sh,target=/usr/local/bin/configure-systemd.sh \
+    /usr/local/bin/configure-systemd.sh
 
 ENV XDG_CURRENT_DESKTOP=GNOME
 
