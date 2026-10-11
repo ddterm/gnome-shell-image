@@ -1,3 +1,18 @@
+FROM quay.io/fedora/fedora:45 as build
+
+# renovate: datasource=custom.bodhi depName=gjs packageName=gjs&status=stable&releases=F45 extractVersion=^gjs-(?<version>\d.*)$
+ARG GJS_VERSION=1.90.0-1.fc45
+
+RUN dnf install -y rpmdevtools rpm-build && \
+    rpmdev-setuptree && \
+    dnf download --source "gjs-$GJS_VERSION" && \
+    dnf builddep -y "gjs-$GJS_VERSION.src.rpm" && \
+    rpm -ivh "gjs-$GJS_VERSION.src.rpm"
+
+RUN --mount=type=bind,source=patch/a49fcfbff25dc86d91bbd45a2b2d5d5e4d35cf58.patch,target=/root/rpmbuild/SOURCES/a49fcfbff25dc86d91bbd45a2b2d5d5e4d35cf58.patch \
+    sed -i -e '/Source0:/a\' -e 'Patch: a49fcfbff25dc86d91bbd45a2b2d5d5e4d35cf58.patch' /root/rpmbuild/SPECS/gjs.spec && \
+    rpmbuild --nocheck -bb /root/rpmbuild/SPECS/gjs.spec
+
 FROM quay.io/fedora/fedora:45
 
 # renovate: datasource=custom.bodhi depName=gnome-shell packageName=gnome-shell&status=stable&releases=F45 extractVersion=^gnome-shell-(?<version>\d.*)$
@@ -12,10 +27,12 @@ ARG GJS_VERSION=1.90.0-1.fc45
 # renovate: datasource=custom.bodhi depName=vte packageName=vte291&status=stable&releases=F45 extractVersion=^vte291-(?<version>\d.*)$
 ARG VTE_VERSION=0.84.1-1.fc45
 
-RUN --mount=type=bind,source=scripts/install-fedora.sh,target=/usr/local/bin/install-fedora.sh env \
+RUN --mount=type=bind,source=scripts/install-fedora.sh,target=/usr/local/bin/install-fedora.sh \
+    --mount=type=bind,from=build,source=/root/rpmbuild/RPMS/x86_64,target=/root/rpmbuild/RPMS/x86_64 \
+    env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
     "MUTTER_VERSION=$MUTTER_VERSION" \
-    "GJS_VERSION=$GJS_VERSION" \
+    "GJS_PACKAGE=/root/rpmbuild/RPMS/x86_64/gjs-$GJS_VERSION.x86_64.rpm" \
     "VTE_VERSION=$VTE_VERSION" \
     /usr/local/bin/install-fedora.sh
 

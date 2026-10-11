@@ -7,7 +7,7 @@ source /etc/os-release
 locked_packages=(
     "gnome-shell${GNOME_SHELL_VERSION:+-$GNOME_SHELL_VERSION}"
     "mutter${MUTTER_VERSION:+-$MUTTER_VERSION}"
-    "gjs${GJS_VERSION:+-$GJS_VERSION}"
+    "${GJS_PACKAGE:-gjs${GJS_VERSION:+-$GJS_VERSION}}"
     "vte291${VTE_VERSION:+-$VTE_VERSION}"
     "vte291-gtk4${VTE_VERSION:+-$VTE_VERSION}"
 )
@@ -36,7 +36,9 @@ dnf install -y --nodocs --setopt install_weak_deps=False "${packages[@]}"
 
 for pkg in "${locked_packages[@]}"
 do
-    rpm -q "$pkg"
+    if [ "$pkg" != "$GJS_PACKAGE" ]; then
+        rpm -q "$pkg"
+    fi
 done
 
 dnf clean all -y
