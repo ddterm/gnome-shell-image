@@ -1,7 +1,7 @@
 FROM docker.io/opensuse/tumbleweed:latest
 
 # renovate: datasource=custom.opensuse-downloads depName=gnome-shell packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^gnome-shell-(?<version>\d.*)\.x86_64\.rpm
-ARG GNOME_SHELL_VERSION=50.5-1.1
+ARG GNOME_SHELL_VERSION=50.5-2.1
 
 # renovate: datasource=custom.opensuse-downloads depName=mutter packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^mutter-(?<version>\d.*)\.x86_64\.rpm
 ARG MUTTER_VERSION=50.5-2.1
