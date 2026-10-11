@@ -18,6 +18,9 @@ packages=(
     gdm
     wl-clipboard
     libhandy
+    meson
+    lcov
+    npm
 )
 
 pacman -Syu --noconfirm "${packages[@]}"

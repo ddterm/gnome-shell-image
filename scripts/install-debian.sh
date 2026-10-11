@@ -20,6 +20,10 @@ packages=(
     xvfb
     wl-clipboard
     gir1.2-handy-1
+    meson
+    lcov
+    npm
+    colorized-logs
 )
 
 if [ "$ID" == ubuntu ]

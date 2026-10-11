@@ -23,6 +23,9 @@ packages=(
     gtk3-metatheme-adwaita
     typelib-1_0-Handy-1_0
     wl-clipboard
+    meson
+    lcov
+    npm
 )
 
 zypper --non-interactive install --no-recommends -f "${packages[@]}"

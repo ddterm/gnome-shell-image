@@ -20,6 +20,10 @@ packages=(
     mesa-dri-drivers
     wl-clipboard
     libhandy
+    meson
+    lcov
+    npm
+    colorized-logs
 )
 
 if [ "$ID" = fedora ]; then

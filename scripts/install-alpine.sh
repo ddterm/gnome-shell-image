@@ -28,6 +28,9 @@ packages="
     gdm
     libhandy1
     wl-clipboard
+    meson
+    lcov
+    npm
 "
 
 apk add $packages
