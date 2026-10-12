@@ -26,6 +26,7 @@ packages=(
     meson
     lcov
     npm
+    git
 )
 
 zypper --non-interactive install --no-recommends -f "${packages[@]}"

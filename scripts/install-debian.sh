@@ -24,6 +24,7 @@ packages=(
     lcov
     npm
     colorized-logs
+    git
 )
 
 if [ "$ID" == ubuntu ]
