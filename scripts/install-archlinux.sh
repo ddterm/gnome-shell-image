@@ -21,6 +21,7 @@ packages=(
     meson
     lcov
     npm
+    git
 )
 
 pacman -Syu --noconfirm "${packages[@]}"

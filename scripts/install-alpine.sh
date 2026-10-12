@@ -31,6 +31,7 @@ packages="
     meson
     lcov
     npm
+    git
 "
 
 apk add $packages
