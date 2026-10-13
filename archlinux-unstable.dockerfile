@@ -7,7 +7,7 @@ ARG GNOME_SHELL_VERSION=1:51.0-1
 ARG MUTTER_VERSION=51.0-1
 
 # renovate: datasource=custom.archlinux depName=gjs packageName=gjs
-ARG GJS_VERSION=2:1.90.0-1
+ARG GJS_VERSION=2:1.90.1-1
 
 # renovate: datasource=custom.archlinux depName=vte packageName=vte3
 ARG VTE_VERSION=0.84.1-1
