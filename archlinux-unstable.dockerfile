@@ -4,7 +4,7 @@ FROM ghcr.io/archlinux/archlinux:base
 ARG GNOME_SHELL_VERSION=1:51.0-1
 
 # renovate: datasource=custom.archlinux depName=mutter packageName=mutter
-ARG MUTTER_VERSION=51.0-1
+ARG MUTTER_VERSION=51.1-1
 
 # renovate: datasource=custom.archlinux depName=gjs packageName=gjs
 ARG GJS_VERSION=2:1.90.1-1
