@@ -1,7 +1,7 @@
 FROM ghcr.io/archlinux/archlinux:base
 
 # renovate: datasource=custom.archlinux depName=gnome-shell packageName=gnome-shell
-ARG GNOME_SHELL_VERSION=1:51.0-1
+ARG GNOME_SHELL_VERSION=1:51.1-1
 
 # renovate: datasource=custom.archlinux depName=mutter packageName=mutter
 ARG MUTTER_VERSION=51.1-1
