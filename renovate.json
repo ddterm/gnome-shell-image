@@ -93,8 +93,8 @@
         "ubuntu-24.04.dockerfile"
       ],
       "registryUrls": [
-        "http://ftp.ubuntu.com/ubuntu?release=noble&components=main,universe&binaryArch=amd64",
-        "http://ftp.ubuntu.com/ubuntu?release=noble-updates&components=main,universe&binaryArch=amd64"
+        "https://archive.ubuntu.com/ubuntu?suite=noble&components=main,universe&binaryArch=amd64",
+        "https://archive.ubuntu.com/ubuntu?suite=noble-updates&components=main,universe&binaryArch=amd64"
       ]
     },
     {
@@ -105,8 +105,20 @@
         "ubuntu-26.04.dockerfile"
       ],
       "registryUrls": [
-        "http://ftp.ubuntu.com/ubuntu?release=resolute&components=main,universe&binaryArch=amd64",
-        "http://ftp.ubuntu.com/ubuntu?release=resolute-updates&components=main,universe&binaryArch=amd64"
+        "https://archive.ubuntu.com/ubuntu?suite=resolute&components=main,universe&binaryArch=amd64",
+        "https://archive.ubuntu.com/ubuntu?suite=resolute-updates&components=main,universe&binaryArch=amd64"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "deb"
+      ],
+      "matchFileNames": [
+        "ubuntu-26.10.dockerfile"
+      ],
+      "registryUrls": [
+        "https://archive.ubuntu.com/ubuntu?suite=stonking&components=main,universe&binaryArch=amd64",
+        "https://archive.ubuntu.com/ubuntu?suite=stonking-updates&components=main,universe&binaryArch=amd64"
       ]
     },
     {
@@ -147,6 +159,10 @@
     }
   ],
   "hostRules": [
+    {
+      "matchHost": "archive.ubuntu.com",
+      "concurrentRequestLimit": 1
+    },
     {
       "matchHost": "archlinux.org",
       "concurrentRequestLimit": 1
