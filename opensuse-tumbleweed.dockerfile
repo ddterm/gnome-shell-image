@@ -1,15 +1,15 @@
 FROM docker.io/opensuse/tumbleweed:latest
 
-# renovate: datasource=custom.opensuse-downloads depName=gnome-shell packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^gnome-shell-(?<version>\d.*)\.x86_64\.rpm
+# renovate: datasource=rpm depName=gnome-shell
 ARG GNOME_SHELL_VERSION=50.5-2.1
 
-# renovate: datasource=custom.opensuse-downloads depName=mutter packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^mutter-(?<version>\d.*)\.x86_64\.rpm
+# renovate: datasource=rpm depName=mutter
 ARG MUTTER_VERSION=50.5-3.1
 
-# renovate: datasource=custom.opensuse-downloads depName=gjs packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^gjs-(?<version>\d.*)\.x86_64\.rpm
+# renovate: datasource=rpm depName=gjs
 ARG GJS_VERSION=1.88.1-2.1
 
-# renovate: datasource=custom.opensuse-downloads depName=vte packageName=tumbleweed/repo/oss/x86_64 versioning=rpm extractVersion=^typelib-1_0-Vte-2_91-(?<version>\d.*)\.x86_64\.rpm
+# renovate: datasource=rpm depName=vte packageName=typelib-1_0-Vte-2_91
 ARG VTE_VERSION=0.84.1-1.4
 
 RUN --mount=type=bind,source=scripts/install-suse.sh,target=/usr/local/bin/install-suse.sh env \

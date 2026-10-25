@@ -12,21 +12,9 @@
         "{'releases':$.results[].{'version':(epoch?epoch&':':'')&pkgver&'-'&pkgrel,'releaseTimestamp':build_date}}"
       ]
     },
-    "bodhi": {
-      "defaultRegistryUrlTemplate": "https://bodhi.fedoraproject.org/updates/?packages={{{ packageName }}}",
-      "transformTemplates": [
-        "{'releases':$.updates[].builds[].{'version':nvr,'releaseTimestamp':%.date_pushed?$replace(%.date_pushed,' ','T')&'Z','isStable':%.status='stable'}}"
-      ]
-    },
     "github-release-assets": {
       "transformTemplates": [
         "{'releases':$[draft=false].{'version':$replace(tag_name,/^v/,''),'isStable':$not(prerelease),'digest':assets[$contains(name,{{{packageName}}})][0].digest.($?$replace(/^sha256:/,''):undefined),'releaseTimestamp':published_at}}"
-      ]
-    },
-    "opensuse-downloads": {
-      "defaultRegistryUrlTemplate": "https://download.opensuse.org/{{{ packageName }}}/?jsontable",
-      "transformTemplates": [
-        "{'releases':[data[].{'version':name}]}"
       ]
     }
   },
@@ -58,8 +46,7 @@
     {
       "matchDatasources": [
         "rpm",
-        "custom.archlinux",
-        "custom.bodhi"
+        "custom.archlinux"
       ],
       "versioning": "rpm"
     },
@@ -83,6 +70,54 @@
       ],
       "registryUrls": [
         "https://mirror.stream.centos.org/10-stream/AppStream/x86_64/os/repodata/"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "rpm"
+      ],
+      "matchFileNames": [
+        "fedora-43.dockerfile"
+      ],
+      "registryUrls": [
+        "https://dl.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/repodata/",
+        "https://dl.fedoraproject.org/pub/fedora/linux/updates/43/Everything/x86_64/repodata/"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "rpm"
+      ],
+      "matchFileNames": [
+        "fedora-44.dockerfile"
+      ],
+      "registryUrls": [
+        "https://dl.fedoraproject.org/pub/fedora/linux/releases/44/Everything/x86_64/os/repodata/",
+        "https://dl.fedoraproject.org/pub/fedora/linux/updates/44/Everything/x86_64/repodata/"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "rpm"
+      ],
+      "matchFileNames": [
+        "fedora-45.dockerfile"
+      ],
+      "registryUrls": [
+        "https://dl.fedoraproject.org/pub/fedora/linux/development/45/Everything/x86_64/os/repodata/",
+        "https://dl.fedoraproject.org/pub/fedora/linux/updates/45/Everything/x86_64/repodata/"
+      ]
+    },
+    {
+      "matchDatasources": [
+        "rpm"
+      ],
+      "matchFileNames": [
+        "opensuse-tumbleweed.dockerfile"
+      ],
+      "registryUrls": [
+        "http://download.opensuse.org/tumbleweed/repo/oss/repodata/",
+        "http://download.opensuse.org/update/tumbleweed/repodata/"
       ]
     },
     {
@@ -149,10 +184,6 @@
   "hostRules": [
     {
       "matchHost": "archlinux.org",
-      "concurrentRequestLimit": 1
-    },
-    {
-      "matchHost": "bodhi.fedoraproject.org",
       "concurrentRequestLimit": 1
     }
   ],
