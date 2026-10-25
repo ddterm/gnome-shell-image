@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora:45 as build
+FROM quay.io/fedora/fedora:45 AS build
 
 # renovate: datasource=rpm depName=gjs packageName=gjs
 ARG GJS_VERSION=1.90.0-1.fc45
