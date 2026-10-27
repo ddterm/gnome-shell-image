@@ -4,7 +4,7 @@ FROM quay.io/fedora/fedora:44
 ARG GNOME_SHELL_VERSION=50.6-1.fc44
 
 # renovate: datasource=rpm depName=mutter packageName=mutter
-ARG MUTTER_VERSION=50.6-1.fc44
+ARG MUTTER_VERSION=50.6-2.fc44
 
 # renovate: datasource=rpm depName=gjs packageName=gjs
 ARG GJS_VERSION=1.88.1-2.fc44
