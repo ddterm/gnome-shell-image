@@ -22,6 +22,7 @@ packages=(
     gnome-extensions
     gtk3-metatheme-adwaita
     typelib-1_0-Handy-1_0
+    typelib-1_0-GLibUnix-2_0
     wl-clipboard
     meson
     lcov
