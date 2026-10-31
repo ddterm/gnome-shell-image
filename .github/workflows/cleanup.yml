@@ -78,7 +78,7 @@ jobs:
             cache: false
 
     steps:
-      - uses: amezin/container-registry-prune-action@4b4965427da5aa037005aa1849921efda619eaa9 # v0.4.5
+      - uses: amezin/container-registry-prune-action@697e80a6418e54049b53a164a8956eda547294ac # v0.4.6
         if: fromJSON(matrix.cache)
         with:
           name: ${{ github.event.repository.name }}/cache/${{ matrix.image }}
@@ -90,7 +90,7 @@ jobs:
           untagged-retention-duration: 1d
           dry-run: ${{ inputs.dry-run }}
 
-      - uses: amezin/container-registry-prune-action@4b4965427da5aa037005aa1849921efda619eaa9 # v0.4.5
+      - uses: amezin/container-registry-prune-action@697e80a6418e54049b53a164a8956eda547294ac # v0.4.6
         with:
           name: ${{ github.event.repository.name }}/${{ matrix.image }}
           tag-patterns: |
