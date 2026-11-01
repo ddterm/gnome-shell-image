@@ -16,10 +16,10 @@ RUN --mount=type=bind,source=patch/a49fcfbff25dc86d91bbd45a2b2d5d5e4d35cf58.patc
 FROM quay.io/fedora/fedora:45
 
 # renovate: datasource=rpm depName=gnome-shell packageName=gnome-shell
-ARG GNOME_SHELL_VERSION=51.0-1.fc45
+ARG GNOME_SHELL_VERSION=51.1-1.fc45
 
 # renovate: datasource=rpm depName=mutter packageName=mutter
-ARG MUTTER_VERSION=51.0-1.fc45
+ARG MUTTER_VERSION=51.1-1.fc45
 
 # renovate: datasource=rpm depName=gjs packageName=gjs
 ARG GJS_VERSION=1.90.0-1.fc45
