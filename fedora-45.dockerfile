@@ -7,7 +7,7 @@ ARG GNOME_SHELL_VERSION=51.1-1.fc45
 ARG MUTTER_VERSION=51.1-1.fc45
 
 # renovate: datasource=rpm depName=gjs packageName=gjs
-ARG GJS_VERSION=1.90.1-1.fc45
+ARG GJS_VERSION=1.90.1-2.fc45
 
 # renovate: datasource=rpm depName=vte packageName=vte291
 ARG VTE_VERSION=0.84.1-1.fc45
