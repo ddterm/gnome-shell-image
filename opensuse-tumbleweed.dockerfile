@@ -4,7 +4,7 @@ FROM docker.io/opensuse/tumbleweed:latest
 ARG GNOME_SHELL_VERSION=51.1-1.1
 
 # renovate: datasource=rpm depName=mutter
-ARG MUTTER_VERSION=51.1-1.1
+ARG MUTTER_VERSION=51.1-2.1
 
 # renovate: datasource=rpm depName=gjs
 ARG GJS_VERSION=1.90.1-1.1
