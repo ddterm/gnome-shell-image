@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=51.1-1
 ARG GJS_VERSION=2:1.90.1-1
 
 # renovate: datasource=custom.archlinux depName=vte packageName=vte3
-ARG VTE_VERSION=0.84.1-1
+ARG VTE_VERSION=0.84.2-1
 
 RUN sed -i -E 's/^#(\[.*-testing\])$/\1/g' /etc/pacman.conf && \
     sed -i -E 's/^#(Include = .*)$/\1/g' /etc/pacman.conf && \

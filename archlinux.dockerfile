@@ -10,7 +10,7 @@ ARG MUTTER_VERSION=51.1-1
 ARG GJS_VERSION=2:1.90.1-1
 
 # renovate: datasource=custom.archlinux depName=vte packageName=vte3&repo=Extra
-ARG VTE_VERSION=0.84.1-1
+ARG VTE_VERSION=0.84.2-1
 
 RUN --mount=type=bind,source=scripts/install-archlinux.sh,target=/usr/local/bin/install-archlinux.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
