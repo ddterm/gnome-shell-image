@@ -1,7 +1,7 @@
 FROM docker.io/library/debian:forky
 
 # renovate: datasource=custom.repology depName=gnome-shell packageName=gnome-shell[repo='debian_14']
-ARG GNOME_SHELL_VERSION=51.0-3
+ARG GNOME_SHELL_VERSION=51.0-4
 
 # renovate: datasource=custom.repology depName=mutter packageName=mutter[repo='debian_14']
 ARG MUTTER_VERSION=51.0-3

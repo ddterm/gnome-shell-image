@@ -7,10 +7,10 @@ ARG GNOME_SHELL_VERSION=51.1-r0
 ARG MUTTER_VERSION=51.1-r0
 
 # renovate: datasource=apk depName=gjs
-ARG GJS_VERSION=1.90.1-r0
+ARG GJS_VERSION=1.90.2-r0
 
 # renovate: datasource=apk depName=vte packageName=vte3
-ARG VTE_VERSION=0.84.1-r5
+ARG VTE_VERSION=0.85.0-r1
 
 RUN --mount=type=bind,source=scripts/install-alpine.sh,target=/usr/local/bin/install-alpine.sh env \
     "GNOME_SHELL_VERSION=$GNOME_SHELL_VERSION" \
